@@ -48,7 +48,7 @@ public class re {
   
   :returns: Corresponding MatchObject instance. Return nil if no position in the string matches the pattern or pattern is invalid; note that this is different from finding a zero-length match at some point in the string.
   */
-  public static func search(pattern: String, string: String, flags: [RegexObject.Flag] = []) -> MatchObject? {
+  public static func search(pattern: String, _ string: String, flags: [RegexObject.Flag] = []) -> MatchObject? {
     return re.compile(pattern, flags: flags).search(string)
   }
   
@@ -63,7 +63,7 @@ public class re {
   
   :returns:   Corresponding MatchObject instance. Return nil if the string does not match the pattern or pattern is invalid; note that this is different from a zero-length match.
   */
-  public static func match(pattern: String, string: String, flags: [RegexObject.Flag] = []) -> MatchObject? {
+  public static func match(pattern: String, _ string: String, flags: [RegexObject.Flag] = []) -> MatchObject? {
     return re.compile(pattern, flags: flags).match(string)
   }
   
@@ -79,8 +79,8 @@ public class re {
   
   :returns: Array of splitted strings
   */
-  public static func split(pattern: String, string: String, maxsplit: Int = 0, flags: [RegexObject.Flag] = []) -> [String?] {
-    return re.compile(pattern, flags: flags).split(string, maxsplit: maxsplit)
+  public static func split(pattern: String, _ string: String, _ maxsplit: Int = 0, flags: [RegexObject.Flag] = []) -> [String?] {
+    return re.compile(pattern, flags: flags).split(string, maxsplit)
   }
 
   /**
@@ -94,7 +94,7 @@ public class re {
   
   :returns: Array of matched substrings
   */
-  public static func findall(pattern: String, string: String, flags: [RegexObject.Flag] = []) -> [String] {
+  public static func findall(pattern: String, _ string: String, flags: [RegexObject.Flag] = []) -> [String] {
     return re.compile(pattern, flags: flags).findall(string)
   }
   
@@ -109,7 +109,7 @@ public class re {
   
   :returns: Array of match results as MatchObject instances
   */
-  public static func finditer(pattern: String, string: String, flags: [RegexObject.Flag] = []) -> [MatchObject] {
+  public static func finditer(pattern: String, _ string: String, flags: [RegexObject.Flag] = []) -> [MatchObject] {
     return re.compile(pattern, flags: flags).finditer(string)
   }
   
@@ -126,8 +126,8 @@ public class re {
   
   :returns: replaced string
   */
-  public static func sub(pattern: String, repl: String, string: String, count: Int = 0, flags: [RegexObject.Flag] = []) -> String {
-    return re.compile(pattern, flags: flags).sub(repl: repl, string: string)
+  public static func sub(pattern: String, _ repl: String, _ string: String, _ count: Int = 0, flags: [RegexObject.Flag] = []) -> String {
+    return re.compile(pattern, flags: flags).sub(repl, string, count)
   }
   
   /**
@@ -143,8 +143,8 @@ public class re {
   
   :returns: a tuple (new_string, number_of_subs_made) as (String, Int)
   */
-  public static func subn(pattern: String, repl: String, string: String, count: Int = 0, flags: [RegexObject.Flag] = []) -> (String, Int) {
-    return re.compile(pattern, flags: flags).subn(repl: repl, string: string)
+  public static func subn(pattern: String, _ repl: String, _ string: String, _ count: Int = 0, flags: [RegexObject.Flag] = []) -> (String, Int) {
+    return re.compile(pattern, flags: flags).subn(repl, string, count)
   }
   
   // MARK: RegexObject
@@ -201,7 +201,7 @@ public class re {
     
     :returns: search result as MatchObject instance if a match is found, otherwise return nil
     */
-    public func search(string: String, pos: UInt = 0, endpos: UInt? = nil, options: [NSMatchingOptions] = []) -> MatchObject? {
+    public func search(string: String, _ pos: UInt = 0, _ endpos: UInt? = nil, options: [NSMatchingOptions] = []) -> MatchObject? {
       guard let regex = regex else {
         return nil
       }
@@ -228,8 +228,8 @@ public class re {
     
     :returns: match result as MatchObject instance if a match is found, otherwise return nil
     */
-    public func match(string: String, pos: UInt = 0, endpos: UInt? = nil) -> MatchObject? {
-      return search(string, pos: pos, endpos: endpos, options: [.Anchored])
+    public func match(string: String, _ pos: UInt = 0, _ endpos: UInt? = nil) -> MatchObject? {
+      return search(string, pos, endpos, options: [.Anchored])
     }
     
     /**
@@ -242,7 +242,7 @@ public class re {
     
     :returns: Array of splitted strings
     */
-    public func split(string: String, maxsplit: Int = 0) -> [String?] {
+    public func split(string: String, _ maxsplit: Int = 0) -> [String?] {
       guard let regex = regex else {
         return []
       }
@@ -289,8 +289,8 @@ public class re {
     
     :returns: Array of matched substrings
     */
-    public func findall(string: String, pos: UInt = 0, endpos: UInt? = nil) -> [String] {
-      return finditer(string, pos: pos, endpos: endpos).map({$0.group()!})
+    public func findall(string: String, _ pos: UInt = 0, _ endpos: UInt? = nil) -> [String] {
+      return finditer(string, pos, endpos).map({$0.group()!})
     }
     
     /**
@@ -304,7 +304,7 @@ public class re {
     
     :returns: Array of match results as MatchObject instances
     */
-    public func finditer(string: String, pos: UInt = 0, endpos: UInt? = nil) -> [MatchObject] {
+    public func finditer(string: String, _ pos: UInt = 0, _ endpos: UInt? = nil) -> [MatchObject] {
       guard let regex = regex else {
         return []
       }
@@ -334,8 +334,8 @@ public class re {
     
     :returns: replaced string
     */
-    public func sub(repl repl: String, string: String, count: Int = 0) -> String {
-      return subn(repl: repl, string: string, count: count).0
+    public func sub(repl: String, _ string: String, _ count: Int = 0) -> String {
+      return subn(repl, string, count).0
     }
     
     /**
@@ -349,7 +349,7 @@ public class re {
     
     :returns: a tuple (new_string, number_of_subs_made) as (String, Int)
     */
-    public func subn(repl repl: String, string: String, count: Int = 0) -> (String, Int) {
+    public func subn(repl: String, _ string: String, _ count: Int = 0) -> (String, Int) {
       guard let regex = regex else {
         return (string, 0)
       }

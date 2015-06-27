@@ -136,7 +136,7 @@ class PySwiftyRegexTests: XCTestCase {
   func testSplitWithMaxSplitSuccess() {
     let regex = re.compile("[,.]")
     let string = "saldkfjalskfd,sdfjlskdfjl.//.sldkfjlskdfj,.sdjflksd."
-    let substrings = regex.split(string, maxsplit: 5)
+    let substrings = regex.split(string, 5)
     XCTAssertEqual(substrings.count, 6)
     XCTAssertTrue(substrings == ["saldkfjalskfd", "sdfjlskdfjl", "//", "sldkfjlskdfj", "", "sdjflksd."] as [String?])
   }
@@ -144,28 +144,28 @@ class PySwiftyRegexTests: XCTestCase {
   func testSubSuccess() {
     let regex = re.compile("[sS]oviet")
     let string = "Soviet will surely win the war, let's cheer for the great soviet"
-    let subbed = regex.sub(repl: "Allies", string: string)
+    let subbed = regex.sub("Allies", string)
     XCTAssertEqual(subbed, "Allies will surely win the war, let's cheer for the great Allies")
   }
   
   func testSubNoOccurrence() {
     let regex = re.compile("[sS]oviet")
     let string = "Allies will surely win the war, let's cheer for the great Allies"
-    let subbed = regex.sub(repl: "Allies", string: string)
+    let subbed = regex.sub("Allies", string)
     XCTAssertEqual(subbed, string)
   }
   
   func testSubWithCount() {
     let regex = re.compile("[sS]oviet")
     let string = "Soviet will surely win the war, let's cheer for the great soviet"
-    XCTAssertEqual(regex.sub(repl: "Allies", string: string, count: 1), "Allies will surely win the war, let's cheer for the great soviet")
-    XCTAssertEqual(regex.sub(repl: "Allies", string: string, count: 2), "Allies will surely win the war, let's cheer for the great Allies")
-    XCTAssertEqual(regex.sub(repl: "Allies", string: string, count: -1), string)
+    XCTAssertEqual(regex.sub("Allies", string, 1), "Allies will surely win the war, let's cheer for the great soviet")
+    XCTAssertEqual(regex.sub("Allies", string, 2), "Allies will surely win the war, let's cheer for the great Allies")
+    XCTAssertEqual(regex.sub("Allies", string, -1), string)
   }
   
   func testSubWithCaptureGroups() {
     let regex = re.compile("(Soviet)(.*)(Allies)")
     let string = "Soviet will beat Allies"
-    XCTAssertEqual(regex.sub(repl: "$3$2$1", string: string), "Allies will beat Soviet")
+    XCTAssertEqual(regex.sub("$3$2$1", string), "Allies will beat Soviet")
   }
 }

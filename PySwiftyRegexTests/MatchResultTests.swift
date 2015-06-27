@@ -45,7 +45,7 @@ class MatchResultTests: XCTestCase {
   }
   
   func testGroups() {
-    let m = re.match("(\\d+)\\.(\\d+)", string: "24.1632")
+    let m = re.match("(\\d+)\\.(\\d+)", "24.1632")
     XCTAssertTrue(m != nil)
     let match = m!
     XCTAssertEqual(match.string, "24.1632")
@@ -56,7 +56,7 @@ class MatchResultTests: XCTestCase {
   }
   
   func testGroupsWithDefault() {
-    let m = re.match("(\\d+)\\.?(\\d+)?", string: "24")
+    let m = re.match("(\\d+)\\.?(\\d+)?", "24")
     XCTAssertTrue(m != nil)
     let match = m!
     let groups = match.groups()
