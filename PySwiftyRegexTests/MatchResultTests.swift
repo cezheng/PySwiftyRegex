@@ -35,7 +35,7 @@ class MatchResultTests: XCTestCase {
   }
   
   func testExpand() {
-    let regex = try! re.compile("(this).+(that)")
+    let regex = re.compile("(this).+(that)")
     let string = "this one is different from that one."
     let m = regex.match(string)
     XCTAssertTrue(m != nil)
@@ -45,22 +45,23 @@ class MatchResultTests: XCTestCase {
   }
   
   func testGroups() {
-    let m = try! re.match("(\\d+)\\.(\\d+)", string: "24.1632")
+    let m = re.match("(\\d+)\\.(\\d+)", string: "24.1632")
     XCTAssertTrue(m != nil)
     let match = m!
     XCTAssertEqual(match.string, "24.1632")
     let groups = match.groups()
     XCTAssertFalse(groups.isEmpty)
     XCTAssertEqual(groups[0]!, "24")
-    //XCTAssertEqual(groups[1]!, "1632")
-    XCTAssertEqual(match.group(2)!, "1632")
-    
-    let m2 = try! re.match("(\\d+)\\.?(\\d+)?", string: "24")
-    XCTAssertTrue(m2 != nil)
-    let match2 = m2!
-    let groups2 = match2.groups()
-    XCTAssertEqual(groups2[0]!, "24")
-    XCTAssertNil(groups2[1])
-    XCTAssertEqual(match2.groups("0"), ["24", "0"])
+    XCTAssertEqual(groups[1]!, "1632")
+  }
+  
+  func testGroupsWithDefault() {
+    let m = re.match("(\\d+)\\.?(\\d+)?", string: "24")
+    XCTAssertTrue(m != nil)
+    let match = m!
+    let groups = match.groups()
+    XCTAssertEqual(groups[0]!, "24")
+    XCTAssertNil(groups[1])
+    XCTAssertEqual(match.groups("0"), ["24", "0"])
   }
 }

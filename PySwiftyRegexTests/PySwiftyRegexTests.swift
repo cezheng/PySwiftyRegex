@@ -22,6 +22,20 @@
 import XCTest
 import PySwiftyRegex
 
+infix operator == {}
+
+func == (left: [String?], right: [String?]) -> Bool {
+  guard left.count == right.count else {
+    return false
+  }
+  for (index, item) in left.enumerate() {
+    if item != right[index] {
+      return false
+    }
+  }
+  return true
+}
+
 class PySwiftyRegexTests: XCTestCase {
   
   override func setUp() {
@@ -35,7 +49,7 @@ class PySwiftyRegexTests: XCTestCase {
   }
   
   func testMatchSuccess() {
-    let regex = try! re.compile("(this).+(that)")
+    let regex = re.compile("(this).+(that)")
     let string = "this one is different from that one."
     let m = regex.match(string)
     XCTAssertTrue(m != nil)
@@ -50,14 +64,14 @@ class PySwiftyRegexTests: XCTestCase {
   }
   
   func testMatchFailure() {
-    let regex = try! re.compile("(this).+(that)")
+    let regex = re.compile("(this).+(that)")
     let string = " this one is different from that one."
     let match = regex.match(string)
     XCTAssertTrue(match == nil)
   }
   
   func testSearchSuccess() {
-    let regex = try! re.compile("(this).+(that)")
+    let regex = re.compile("(this).+(that)")
     let string = "this one is different from that one."
     let m = regex.search(string)
     XCTAssertTrue(m != nil)
@@ -72,7 +86,7 @@ class PySwiftyRegexTests: XCTestCase {
   }
   
   func testSearchNestGroupsSuccess() {
-    let regex = try! re.compile("((\\s*this\\s*)+).+?((\\s*that\\s*)+)")
+    let regex = re.compile("((\\s*this\\s*)+).+?((\\s*that\\s*)+)")
     let string = "this this this one is different from that that that one."
     let m = regex.search(string)
     XCTAssertTrue(m != nil)
@@ -91,7 +105,7 @@ class PySwiftyRegexTests: XCTestCase {
   }
   
   func testFindallSuccess() {
-    let regex = try! re.compile("([abc]+[123]+)")
+    let regex = re.compile("([abc]+[123]+)")
     let string = "abcd1234-aab113-abc333-adbca3432ddbca332233"
     let matches = regex.findall(string)
     XCTAssertEqual(matches.count, 4)
@@ -99,7 +113,7 @@ class PySwiftyRegexTests: XCTestCase {
   }
   
   func testFindIterSuccess() {
-    let regex = try! re.compile("([abc]+[123]+)")
+    let regex = re.compile("([abc]+[123]+)")
     let string = "abcd1234-aab113-abc333-adbca3432ddbca332233"
     let matches = regex.finditer(string)
     XCTAssertEqual(matches.count, 4)
@@ -112,37 +126,37 @@ class PySwiftyRegexTests: XCTestCase {
   }
   
   func testSplitSuccess() {
-    let regex = try! re.compile("[,.]")
+    let regex = re.compile("[,.]")
     let string = "saldkfjalskfd,sdfjlskdfjl.//.sldkfjlskdfj,.sdjflksd."
     let substrings = regex.split(string)
     XCTAssertEqual(substrings.count, 7)
-    XCTAssertEqual(substrings, ["saldkfjalskfd", "sdfjlskdfjl", "//", "sldkfjlskdfj", "", "sdjflksd", ""])
+    XCTAssertTrue(substrings == ["saldkfjalskfd", "sdfjlskdfjl", "//", "sldkfjlskdfj", "", "sdjflksd", ""] as [String?])
   }
   
   func testSplitWithMaxSplitSuccess() {
-    let regex = try! re.compile("[,.]")
+    let regex = re.compile("[,.]")
     let string = "saldkfjalskfd,sdfjlskdfjl.//.sldkfjlskdfj,.sdjflksd."
     let substrings = regex.split(string, maxsplit: 5)
     XCTAssertEqual(substrings.count, 6)
-    XCTAssertEqual(substrings, ["saldkfjalskfd", "sdfjlskdfjl", "//", "sldkfjlskdfj", "", "sdjflksd."])
+    XCTAssertTrue(substrings == ["saldkfjalskfd", "sdfjlskdfjl", "//", "sldkfjlskdfj", "", "sdjflksd."] as [String?])
   }
   
   func testSubSuccess() {
-    let regex = try! re.compile("[sS]oviet")
+    let regex = re.compile("[sS]oviet")
     let string = "Soviet will surely win the war, let's cheer for the great soviet"
     let subbed = regex.sub(repl: "Allies", string: string)
     XCTAssertEqual(subbed, "Allies will surely win the war, let's cheer for the great Allies")
   }
   
   func testSubNoOccurrence() {
-    let regex = try! re.compile("[sS]oviet")
+    let regex = re.compile("[sS]oviet")
     let string = "Allies will surely win the war, let's cheer for the great Allies"
     let subbed = regex.sub(repl: "Allies", string: string)
     XCTAssertEqual(subbed, string)
   }
   
   func testSubWithCount() {
-    let regex = try! re.compile("[sS]oviet")
+    let regex = re.compile("[sS]oviet")
     let string = "Soviet will surely win the war, let's cheer for the great soviet"
     XCTAssertEqual(regex.sub(repl: "Allies", string: string, count: 1), "Allies will surely win the war, let's cheer for the great soviet")
     XCTAssertEqual(regex.sub(repl: "Allies", string: string, count: 2), "Allies will surely win the war, let's cheer for the great Allies")
@@ -150,7 +164,7 @@ class PySwiftyRegexTests: XCTestCase {
   }
   
   func testSubWithCaptureGroups() {
-    let regex = try! re.compile("(Soviet)(.*)(Allies)")
+    let regex = re.compile("(Soviet)(.*)(Allies)")
     let string = "Soviet will beat Allies"
     XCTAssertEqual(regex.sub(repl: "$3$2$1", string: string), "Allies will beat Soviet")
   }
