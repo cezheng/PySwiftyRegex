@@ -74,7 +74,7 @@ public class re {
   
   :param: pattern  regular expression pattern string
   :param: string   string to be splitted
-  :param: maxsplit maximum number of times to split the string
+  :param: maxsplit maximum number of times to split the string, defaults to 0, meaning no limit is applied
   :param: flags    NSRegularExpressionOptions object
   
   :returns: Array of splitted strings
@@ -149,7 +149,7 @@ public class re {
   
   // MARK: RegexObject
   
-  public struct RegexObject {
+  public class RegexObject {
     public typealias Flag = NSRegularExpressionOptions
     
     /// Whether this object is valid or not
@@ -161,7 +161,7 @@ public class re {
     private let regex: NSRegularExpression?
     
     public var nsRegex: NSRegularExpression? {
-      return self.regex
+      return regex
     }
     
     public var flags: Flag {
@@ -238,7 +238,7 @@ public class re {
     See https://docs.python.org/2/library/re.html#re.RegexObject.split
     
     :param: string   string to be splitted
-    :param: maxsplit maximum number of times to split the string
+    :param: maxsplit maximum number of times to split the string, defaults to 0, meaning no limit is applied
     
     :returns: Array of splitted strings
     */
@@ -261,14 +261,14 @@ public class re {
         if let result = result {
           end = advance(string.startIndex, result.range.location)
           length = result.range.length
-          if regex.numberOfCaptureGroups > 0 {
-            results.extend(MatchObject(string: string, match: result).groups())
-          }
         } else {
           end = string.endIndex
           length = 0
         }
         results.append(string.substringWithRange(start..<end))
+        if regex.numberOfCaptureGroups > 0 {
+          results.extend(MatchObject(string: string, match: result).groups())
+        }
         splitsLeft--
         start = advance(end, length)
       }
@@ -378,7 +378,7 @@ public class re {
   
   // MARK: MatchObject
   
-  public struct MatchObject {
+  public class MatchObject {
     public let string: String
     public let match: NSTextCheckingResult?
     
@@ -399,13 +399,13 @@ public class re {
     :returns: expanded string
     */
     public func expand(template: String) -> String {
-      guard let match = self.match else {
+      guard let match = match else {
         return ""
       }
       guard let regex = match.regularExpression else {
         return ""
       }
-      return regex.replacementStringForResult(match, inString: self.string, offset: 0, template: template)
+      return regex.replacementStringForResult(match, inString: string, offset: 0, template: template)
     }
     
     /**
@@ -439,7 +439,7 @@ public class re {
     :returns: array of strings of the matching groups
     */
     public func group(indexes: [Int]) -> [String?] {
-      return indexes.map({self.group($0)})
+      return indexes.map({group($0)})
     }
     
     /**
@@ -458,7 +458,7 @@ public class re {
         return []
       }
       return (1..<match.numberOfRanges).map({
-        if let string: String = self.group($0) {
+        if let string: String = group($0) {
           return string
         }
         return defaultValue
@@ -478,7 +478,7 @@ public class re {
       guard let match = match else {
         return []
       }
-      return (1..<match.numberOfRanges).map({self.group($0)})
+      return (1..<match.numberOfRanges).map({group($0)})
     }
     
     /**

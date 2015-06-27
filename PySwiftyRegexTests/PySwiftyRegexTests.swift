@@ -141,6 +141,14 @@ class PySwiftyRegexTests: XCTestCase {
     XCTAssertTrue(substrings == ["saldkfjalskfd", "sdfjlskdfjl", "//", "sldkfjlskdfj", "", "sdjflksd."] as [String?])
   }
   
+  func testSplitWithGroups() {
+    let regex = re.compile("([,.])")
+    let string = "saldkfjalskfd,sdfjlskdfjl.//.sldkfjlskdfj,.sdjflksd."
+    let substrings = regex.split(string)
+    XCTAssertEqual(substrings.count, 13)
+    XCTAssertTrue(substrings == ["saldkfjalskfd", ",", "sdfjlskdfjl", ".", "//", ".", "sldkfjlskdfj", ",", "", ".", "sdjflksd", ".", ""] as [String?])
+  }
+  
   func testSubSuccess() {
     let regex = re.compile("[sS]oviet")
     let string = "Soviet will surely win the war, let's cheer for the great soviet"
@@ -167,5 +175,16 @@ class PySwiftyRegexTests: XCTestCase {
     let regex = re.compile("(Soviet)(.*)(Allies)")
     let string = "Soviet will beat Allies"
     XCTAssertEqual(regex.sub("$3$2$1", string), "Allies will beat Soviet")
+  }
+  
+  func testCompileInvalidPattern() {
+    let regex = re.compile("(")
+    XCTAssertFalse(regex.isValid)
+    XCTAssertNil(regex.search("test") as? AnyObject)
+    XCTAssertNil(regex.match("test") as? AnyObject)
+    XCTAssertNil(regex.nsRegex)
+    XCTAssertTrue(regex.split("sdf(sdf") == [])
+    XCTAssertEqual(regex.sub("o", "hahaha("), "hahaha(")
+    XCTAssertEqual(regex.subn("o", "hahaha(").1, 0)
   }
 }
