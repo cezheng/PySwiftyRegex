@@ -21,15 +21,18 @@
 
 import Foundation
 
+/**
+*  Counterpart of Python's re module, but as a class.
+*/
 public class re {
-  // MARK: re methods
+  // MARK: - re methods
   /**
   Compile a regular expression pattern into a RegexObject object, which can be used for matching using its match() and search() methods, described below.
   
   See https://docs.python.org/2/library/re.html#re.compile
   
   :param: pattern regular expression pattern string
-  :param: flags   NSRegularExpressionOptions object
+  :param: flags   Array of NSRegularExpressionOptions objects
   
   :returns: The created RegexObject object. If the pattern is invalid, RegexObject.isValid is false, and all methods have a default return value.
   */
@@ -44,7 +47,7 @@ public class re {
   
   :param: pattern regular expression pattern string
   :param: string  string to be searched
-  :param: flags   NSRegularExpressionOptions object
+  :param: flags   Array of NSRegularExpressionOptions objects
   
   :returns: Corresponding MatchObject instance. Return nil if no position in the string matches the pattern or pattern is invalid; note that this is different from finding a zero-length match at some point in the string.
   */
@@ -59,7 +62,7 @@ public class re {
   
   :param: pattern regular expression pattern string
   :param: string  string to be searched
-  :param: flags   NSRegularExpressionOptions object
+  :param: flags   Array of NSRegularExpressionOptions objects
   
   :returns:   Corresponding MatchObject instance. Return nil if the string does not match the pattern or pattern is invalid; note that this is different from a zero-length match.
   */
@@ -75,7 +78,7 @@ public class re {
   :param: pattern  regular expression pattern string
   :param: string   string to be splitted
   :param: maxsplit maximum number of times to split the string, defaults to 0, meaning no limit is applied
-  :param: flags    NSRegularExpressionOptions object
+  :param: flags    Array of NSRegularExpressionOptions objects
   
   :returns: Array of splitted strings
   */
@@ -90,7 +93,7 @@ public class re {
   
   :param: pattern regular expression pattern string
   :param: string  string to be searched
-  :param: flags   NSRegularExpressionOptions object
+  :param: flags   Array of NSRegularExpressionOptions objects
   
   :returns: Array of matched substrings
   */
@@ -105,7 +108,7 @@ public class re {
   
   :param: pattern regular expression pattern string
   :param: string  string to be searched
-  :param: flags   NSRegularExpressionOptions object
+  :param: flags   Array of NSRegularExpressionOptions objects
   
   :returns: Array of match results as MatchObject instances
   */
@@ -122,7 +125,7 @@ public class re {
   :param: repl    replacement string
   :param: string  string to be searched and replaced
   :param: count   maximum number of times to perform replace operations to the string
-  :param: flags   NSRegularExpressionOptions object
+  :param: flags   Array of NSRegularExpressionOptions objects
   
   :returns: replaced string
   */
@@ -139,7 +142,7 @@ public class re {
   :param: repl    replacement string
   :param: string  string to be searched and replaced
   :param: count   maximum number of times to perform replace operations to the string
-  :param: flags   NSRegularExpressionOptions object
+  :param: flags   Array of NSRegularExpressionOptions objects
   
   :returns: a tuple (new_string, number_of_subs_made) as (String, Int)
   */
@@ -147,9 +150,12 @@ public class re {
     return re.compile(pattern, flags: flags).subn(repl, string, count)
   }
   
-  // MARK: RegexObject
-  
+  // MARK: - RegexObject
+  /**
+  *  Counterpart of Python's re.RegexObject
+  */
   public class RegexObject {
+    /// Typealias for NSRegularExpressionOptions
     public typealias Flag = NSRegularExpressionOptions
     
     /// Whether this object is valid or not
@@ -157,13 +163,17 @@ public class re {
       return regex != nil
     }
     
+    /// Pattern used to construct this RegexObject
     public let pattern: String
+    
     private let regex: NSRegularExpression?
     
+    /// Underlying NSRegularExpression Object
     public var nsRegex: NSRegularExpression? {
       return regex
     }
     
+    /// NSRegularExpressionOptions used to contructor this RegexObject
     public var flags: Flag {
       if let regex = regex {
         return regex.options
@@ -171,6 +181,7 @@ public class re {
       return Flag(rawValue: 0)
     }
     
+    /// Number of capturing groups
     public var groups: Int {
       if let regex = regex {
         return regex.numberOfCaptureGroups
@@ -197,7 +208,7 @@ public class re {
     :param: string  string to be searched
     :param: pos     position in string where the search is to start, defaults to 0
     :param: endpos  position in string where the search it to end (non-inclusive), defaults to nil, meaning the end of the string. If endpos is less than pos, no match will be found.
-    :param: options NSMatchOptions object
+    :param: options Array of NSMatchOptions objects
     
     :returns: search result as MatchObject instance if a match is found, otherwise return nil
     */
@@ -376,10 +387,15 @@ public class re {
     }
   }
   
-  // MARK: MatchObject
-  
+  // MARK: - MatchObject
+  /**
+  *  Counterpart of Python's re.MatchObject
+  */
   public class MatchObject {
+    /// String matched
     public let string: String
+    
+    /// Underlying NSTextCheckingResult
     public let match: NSTextCheckingResult?
     
     init(string: String, match: NSTextCheckingResult?) {
