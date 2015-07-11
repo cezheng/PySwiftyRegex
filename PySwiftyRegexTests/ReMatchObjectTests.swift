@@ -1,4 +1,4 @@
-// MatchResultTests.swift
+// ReMatchObjectTests.swift
 // Copyright (c) 2015 Ce Zheng
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -22,18 +22,7 @@
 import XCTest
 import PySwiftyRegex
 
-class MatchResultTests: XCTestCase {
-  
-  override func setUp() {
-    super.setUp()
-    // Put setup code here. This method is called before the invocation of each test method in the class.
-  }
-  
-  override func tearDown() {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    super.tearDown()
-  }
-  
+class ReMatchObjectTests: XCTestCase {  
   func testExpand() {
     let regex = re.compile("(this).+(that)")
     let string = "this one is different from that one."
