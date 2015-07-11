@@ -87,7 +87,7 @@ public class re {
   }
 
   /**
-  Return all non-overlapping matches of pattern in string, as a list of strings. The string is scanned left-to-right, and matches are returned in the order found. If one or more groups are present in the pattern, return a list of groups; this will be a list of tuples if the pattern has more than one group. Empty matches are included in the result unless they touch the beginning of another match.
+  Return all non-overlapping matches of pattern in string, as a list of strings. The string is scanned left-to-right, and matches are returned in the order found. Empty matches are included in the result unless they touch the beginning of another match.
   
   See https://docs.python.org/2/library/re.html#re.findall
   
@@ -276,6 +276,9 @@ public class re {
           end = string.endIndex
           length = 0
         }
+        if length == 0 {
+          return
+        }
         results.append(string.substringWithRange(start..<end))
         if regex.numberOfCaptureGroups > 0 {
           results.extend(MatchObject(string: string, match: result).groups())
@@ -283,7 +286,7 @@ public class re {
         splitsLeft--
         start = advance(end, length)
       }
-      if start >= end {
+      if start <= string.endIndex {
         results.append(string.substringWithRange(start..<string.endIndex))
       }
       return results
