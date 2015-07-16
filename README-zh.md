@@ -2,6 +2,7 @@
 像Python一样简洁高效地作正则处理。
 
 [English](https://github.com/cezheng/PySwiftyRegex/blob/master/README.md)
+[日本語](https://github.com/cezheng/PySwiftyRegex/blob/master/README-ja.md)
 
 ## 先上代码
 

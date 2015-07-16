@@ -1,9 +1,10 @@
 # PySwiftyRegex
-Easily deal with Regex in Swift in a Pythonic way.
+Pythonのようなスッキリした正規表現ライブラリー。
 
+[English](https://github.com/cezheng/PySwiftyRegex/blob/master/README.md)
 [简体中文](https://github.com/cezheng/PySwiftyRegex/blob/master/README-zh.md)
-[日本語](https://github.com/cezheng/PySwiftyRegex/blob/master/README-ja.md)
-## This is Easy
+
+## コードをみましょう
 
 ```swift
 import PySwiftyRegex
@@ -14,13 +15,13 @@ if let m = re.search("[Tt]his is (.*?)easy", "I think this is really easy!!!") {
 }
 ```
 
-## Requirements
+## 環境
 
 - iOS 7.0+ / Mac OS X 10.9+
 - Xcode 7.0
 
-## Supported re methods
-If you are familiar with Python's [**re**](https://docs.python.org/2/library/re.html) module, you are ready to go. If not, you may like to check how Python's re is better than the cumbersome NSRegularExpression's APIs, by clicking at the items below.
+## 対応したreメソッド
+[**re**](https://docs.python.org/2/library/re.html) モデルを使ったことがあれば, すぐこのライブラリーをご利用できると思います。もしなかったら、下記のPythonドキュメントのリンクをご覧いただけると、このシンプルなモデルに一目惚れするかもしれませんw
 ### [re](https://docs.python.org/2/library/re.html#module-contents)
 * [re.compile](https://docs.python.org/2/library/re.html#re.compile)
 * [re.search](https://docs.python.org/2/library/re.html#re.search)
@@ -46,13 +47,13 @@ If you are familiar with Python's [**re**](https://docs.python.org/2/library/re.
 * [groups](https://docs.python.org/2/library/re.html#re.MatchObject.groups)
 * [span](https://docs.python.org/2/library/re.html#re.MatchObject.span)
 
-## Installation
-> **Embedded frameworks require a minimum deployment target of iOS 8 or OS X Mavericks.**
+## インストール
+> **Embedded frameworks を使うには iOS 8 または OS X Mavericks 以上は必要です**
 >
-> To use `PySwiftyRegex` with a project targeting iOS 7, copy the [PySwiftyRegex.swift](https://github.com/cezheng/PySwiftyRegex/blob/master/PySwiftyRegex/PySwiftyRegex.swift) file into your project.
+> Deployment Target は iOS 7 のプロジェクトで `PySwiftyRegex` を使うには, [PySwiftyRegex.swift](https://github.com/cezheng/PySwiftyRegex/blob/master/PySwiftyRegex/PySwiftyRegex.swift) のソースファイルをダウンロードして、Xcodeプロジェクトに追加するのは必要となります。
 
 ### CocoaPods(iOS 8+, OS X 10.9+)
-You can use [Cocoapods](http://cocoapods.org/) to install `PySwiftyRegex` by adding it to your to your `Podfile`:
+[Cocoapods](http://cocoapods.org/) で簡単に `PySwiftyRegex` をインストールできます。 下記のように`Podfile`を編集してください:
 
 ```ruby
 platform :ios, '8.0'
@@ -63,12 +64,12 @@ target 'MyApp' do
 end
 ```
 
-Then, run the following command:
+そして、下記のコマンドを実行してください:
 
 ```bash
 $ pod install
 ```
 
-## License
+## ライセンス
 
-`PySwiftyRegex` is released under the MIT license. See [LICENSE](https://github.com/cezheng/PySwiftyRegex/blob/master/LICENSE) for details.
+`PySwiftyRegex` のオープンソースライセンスは MIT です。 詳しくはこちら [LICENSE](https://github.com/cezheng/PySwiftyRegex/blob/master/LICENSE) 。
