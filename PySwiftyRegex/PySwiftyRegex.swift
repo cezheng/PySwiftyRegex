@@ -175,18 +175,12 @@ public class re {
     
     /// NSRegularExpressionOptions used to contructor this RegexObject
     public var flags: Flag {
-      if let regex = regex {
-        return regex.options
-      }
-      return Flag(rawValue: 0)
+      return regex?.options ?? Flag(rawValue: 0)
     }
     
     /// Number of capturing groups
     public var groups: Int {
-      if let regex = regex {
-        return regex.numberOfCaptureGroups
-      }
-      return 0
+      return regex?.numberOfCaptureGroups ?? 0
     }
     
     init(pattern: String, flags: [Flag] = [])  {
@@ -212,12 +206,12 @@ public class re {
     
     :returns: search result as MatchObject instance if a match is found, otherwise return nil
     */
-    public func search(string: String, _ pos: UInt = 0, _ endpos: UInt? = nil, options: [NSMatchingOptions] = []) -> MatchObject? {
+    public func search(string: String, _ pos: Int = 0, _ endpos: Int? = nil, options: [NSMatchingOptions] = []) -> MatchObject? {
       guard let regex = regex else {
         return nil
       }
-      let start = Int(pos)
-      let end = endpos == nil ? Int(string.characters.count) : Int(endpos!)
+      let start = pos > 0 ?pos :0
+      let end = endpos ?? string.characters.count
       let length = max(0, end - start)
       let range = NSRange(location: start, length: length)
       let options = NSMatchingOptions(rawValue: options.reduce(0) {$0 | $1.rawValue})
@@ -239,7 +233,7 @@ public class re {
     
     :returns: match result as MatchObject instance if a match is found, otherwise return nil
     */
-    public func match(string: String, _ pos: UInt = 0, _ endpos: UInt? = nil) -> MatchObject? {
+    public func match(string: String, _ pos: Int = 0, _ endpos: Int? = nil) -> MatchObject? {
       return search(string, pos, endpos, options: [.Anchored])
     }
     
@@ -263,9 +257,9 @@ public class re {
       var results = [String?]()
       var start = string.startIndex
       var end = string.startIndex
-      regex.enumerateMatchesInString(string, options: options, range: range) {
-        (result: NSTextCheckingResult?, flags: NSMatchingFlags, ptr: UnsafeMutablePointer<ObjCBool>) in
+      regex.enumerateMatchesInString(string, options: options, range: range) { result, _, stop in
         if splitsLeft <= 0 {
+          stop.memory = true
           return
         }
         let length: Int
@@ -303,7 +297,7 @@ public class re {
     
     :returns: Array of matched substrings
     */
-    public func findall(string: String, _ pos: UInt = 0, _ endpos: UInt? = nil) -> [String] {
+    public func findall(string: String, _ pos: Int = 0, _ endpos: Int? = nil) -> [String] {
       return finditer(string, pos, endpos).map({$0.group()!})
     }
     
@@ -318,18 +312,17 @@ public class re {
     
     :returns: Array of match results as MatchObject instances
     */
-    public func finditer(string: String, _ pos: UInt = 0, _ endpos: UInt? = nil) -> [MatchObject] {
+    public func finditer(string: String, _ pos: Int = 0, _ endpos: Int? = nil) -> [MatchObject] {
       guard let regex = regex else {
         return []
       }
-      let start = Int(pos)
-      let end = endpos == nil ? Int(string.characters.count) : Int(endpos!)
+      let start = pos > 0 ?pos :0
+      let end = endpos ?? string.characters.count
       let length = max(0, end - start)
       let range = NSRange(location: start, length: length)
       let options = NSMatchingOptions(rawValue: 0)
       var matches = [NSTextCheckingResult]()
-      regex.enumerateMatchesInString(string, options: options, range: range) {
-        (result: NSTextCheckingResult?, flags: NSMatchingFlags, ptr: UnsafeMutablePointer<ObjCBool>) in
+      regex.enumerateMatchesInString(string, options: options, range: range) { result, _, _ in
         if let result = result {
           matches.append(result)
         }
@@ -373,9 +366,9 @@ public class re {
       let maxCount = count == 0 ? Int.max : (count > 0 ? count : 0)
       var n = 0
       var offset = 0
-      regex.enumerateMatchesInString(string, options: options, range: range) {
-        (result: NSTextCheckingResult?, flags: NSMatchingFlags, ptr: UnsafeMutablePointer<ObjCBool>) in
-        if maxCount - n <= 0 {
+      regex.enumerateMatchesInString(string, options: options, range: range) { result, _, stop in
+        if maxCount <= n {
+          stop.memory = true
           return
         }
         if let result = result {
