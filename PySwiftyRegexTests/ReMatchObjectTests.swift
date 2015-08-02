@@ -27,7 +27,7 @@ class ReMatchObjectTests: XCTestCase {
     let regex = re.compile("(this).+(that)")
     let string = "this one is different from that one."
     let m = regex.match(string)
-    XCTAssertTrue(m != nil)
+    XCTAssertNotNil(m)
     let match = m!
     XCTAssertEqual(match.string, string)
     XCTAssertEqual(match.expand("$2 ~ $1"), "that ~ this")
@@ -35,7 +35,7 @@ class ReMatchObjectTests: XCTestCase {
   
   func testGroups() {
     let m = re.match("(\\d+)\\.(\\d+)", "24.1632")
-    XCTAssertTrue(m != nil)
+    XCTAssertNotNil(m)
     let match = m!
     XCTAssertEqual(match.string, "24.1632")
     let groups = match.groups()
@@ -46,7 +46,7 @@ class ReMatchObjectTests: XCTestCase {
   
   func testGroupsWithDefault() {
     let m = re.match("(\\d+)\\.?(\\d+)?", "24")
-    XCTAssertTrue(m != nil)
+    XCTAssertNotNil(m)
     let match = m!
     let groups = match.groups()
     XCTAssertEqual(groups[0]!, "24")

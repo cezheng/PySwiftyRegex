@@ -41,7 +41,7 @@ class ReRegexObjectTests: XCTestCase {
     let regex = re.compile("(this).+(that)")
     let string = "this one is different from that one."
     let m = regex.match(string)
-    XCTAssertTrue(m != nil)
+    XCTAssertNotNil(m)
     let match = m!
     XCTAssertEqual(match.string, string)
     XCTAssertEqual(match.group()!, "this one is different from that")
@@ -52,11 +52,26 @@ class ReRegexObjectTests: XCTestCase {
     XCTAssertEqual(match.span(2)!, advance(string.startIndex, 27)..<advance(string.startIndex, 31))
   }
   
+  func testMatchWithRangeSuccess() {
+    let regex = re.compile("(this).+(that).*")
+    let string = "omg this one is different from that one."
+    let m = regex.match(string, 4, 38)
+    XCTAssertNotNil(m)
+    let match = m!
+    XCTAssertEqual(match.string, string)
+    XCTAssertEqual(match.group()!, "this one is different from that on")
+    XCTAssertEqual(match.group(1)!, "this")
+    XCTAssertEqual(match.group(2)!, "that")
+    XCTAssertEqual(match.span()!, advance(string.startIndex, 4)..<advance(string.startIndex, 38))
+    XCTAssertEqual(match.span(1)!, advance(string.startIndex, 4)..<advance(string.startIndex, 8))
+    XCTAssertEqual(match.span(2)!, advance(string.startIndex, 31)..<advance(string.startIndex, 35))
+  }
+  
   func testMatchFailure() {
     let regex = re.compile("(this).+(that)")
     let string = " this one is different from that one."
     let match = regex.match(string)
-    XCTAssertTrue(match == nil)
+    XCTAssertNil(match)
   }
   
   func testSearchSuccess() {
@@ -74,11 +89,26 @@ class ReRegexObjectTests: XCTestCase {
     XCTAssertEqual(match.span(2)!, advance(string.startIndex, 27)..<advance(string.startIndex, 31))
   }
   
+  func testSearchWithRangeSuccess() {
+    let regex = re.compile("(this).+(that) .*")
+    let string = "omg this one is different from that one."
+    let m = regex.search(string, 4, 38)
+    XCTAssertNotNil(m)
+    let match = m!
+    XCTAssertEqual(match.string, string)
+    XCTAssertEqual(match.group()!, "this one is different from that on")
+    XCTAssertEqual(match.group(1)!, "this")
+    XCTAssertEqual(match.group(2)!, "that")
+    XCTAssertEqual(match.span()!, advance(string.startIndex, 4)..<advance(string.startIndex, 38))
+    XCTAssertEqual(match.span(1)!, advance(string.startIndex, 4)..<advance(string.startIndex, 8))
+    XCTAssertEqual(match.span(2)!, advance(string.startIndex, 31)..<advance(string.startIndex, 35))
+  }
+  
   func testSearchNestGroupsSuccess() {
     let regex = re.compile("((\\s*this\\s*)+).+?((\\s*that\\s*)+)")
     let string = "this this this one is different from that that that one."
     let m = regex.search(string)
-    XCTAssertTrue(m != nil)
+    XCTAssertNotNil(m)
     let match = m!
     XCTAssertEqual(match.string, string)
     XCTAssertEqual(match.group()!, "this this this one is different from that that that ")
@@ -101,12 +131,33 @@ class ReRegexObjectTests: XCTestCase {
     XCTAssertEqual(matches, ["aab113", "abc333", "bca3", "bca332233"])
   }
   
+  func testFindallSuccessWithPos() {
+    let regex = re.compile("([abc]+[123]+)")
+    let string = "abcd1234-aab113-abc333-adbca3432ddbca332233"
+    let matches = regex.findall(string, 21)
+    XCTAssertEqual(matches.count, 2)
+    XCTAssertEqual(matches, ["bca3", "bca332233"])
+  }
+  
   func testFindIterSuccess() {
     let regex = re.compile("([abc]+[123]+)")
     let string = "abcd1234-aab113-abc333-adbca3432ddbca332233"
     let matches = regex.finditer(string)
     XCTAssertEqual(matches.count, 4)
     let expectations = ["aab113", "abc333", "bca3", "bca332233"];
+    for (index, expectation) in expectations.enumerate() {
+      let group: String? = matches[index].group()
+      XCTAssertNotNil(group)
+      XCTAssertEqual(group!, expectation)
+    }
+  }
+  
+  func testFindIterSuccessWithPos() {
+    let regex = re.compile("([abc]+[123]+)")
+    let string = "abcd1234-aab113-abc333-adbca3432ddbca332233"
+    let matches = regex.finditer(string, 9, 21)
+    XCTAssertEqual(matches.count, 2)
+    let expectations = ["aab113", "abc33"];
     for (index, expectation) in expectations.enumerate() {
       let group: String? = matches[index].group()
       XCTAssertNotNil(group)
