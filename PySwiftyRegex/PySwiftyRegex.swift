@@ -183,7 +183,17 @@ public class re {
       return regex?.numberOfCaptureGroups ?? 0
     }
     
-    init(pattern: String, flags: [Flag] = [])  {
+    private let defaultMatchingOptions = NSMatchingOptions(rawValue: 0)
+    
+    /**
+    Create A re.RegexObject Instance
+    
+    :param: pattern regular expression pattern string
+    :param: flags   Array of NSRegularExpressionOptions objects
+    
+    :returns: The created RegexObject object. If the pattern is invalid, RegexObject.isValid is false, and all methods have a default return value.
+    */
+    public required init(pattern: String, flags: [Flag] = [])  {
       self.pattern = pattern
       let options = Flag(rawValue: flags.reduce(0) {$0 | $1.rawValue})
       do {
@@ -252,12 +262,11 @@ public class re {
         return []
       }
       var splitsLeft = maxsplit == 0 ? Int.max : (maxsplit < 0 ? 0 : maxsplit)
-      let options = NSMatchingOptions(rawValue: 0)
       let range = NSRange(location: 0, length: string.characters.count)
       var results = [String?]()
       var start = string.startIndex
       var end = string.startIndex
-      regex.enumerateMatchesInString(string, options: options, range: range) { result, _, stop in
+      regex.enumerateMatchesInString(string, options: defaultMatchingOptions, range: range) { result, _, stop in
         if splitsLeft <= 0 {
           stop.memory = true
           return
@@ -275,7 +284,7 @@ public class re {
         }
         results.append(string.substringWithRange(start..<end))
         if regex.numberOfCaptureGroups > 0 {
-          results.extend(MatchObject(string: string, match: result).groups())
+          results.extend(MatchObject(string: string, match: result!).groups())
         }
         splitsLeft--
         start = advance(end, length)
@@ -298,7 +307,7 @@ public class re {
     :returns: Array of matched substrings
     */
     public func findall(string: String, _ pos: Int = 0, _ endpos: Int? = nil) -> [String] {
-      return finditer(string, pos, endpos).map({$0.group()!})
+      return finditer(string, pos, endpos).map { $0.group()! }
     }
     
     /**
@@ -320,14 +329,7 @@ public class re {
       let end = endpos ?? string.characters.count
       let length = max(0, end - start)
       let range = NSRange(location: start, length: length)
-      let options = NSMatchingOptions(rawValue: 0)
-      var matches = [NSTextCheckingResult]()
-      regex.enumerateMatchesInString(string, options: options, range: range) { result, _, _ in
-        if let result = result {
-          matches.append(result)
-        }
-      }
-      return matches.map({MatchObject(string: string, match: $0)})
+      return regex.matchesInString(string, options: defaultMatchingOptions, range: range).map { MatchObject(string: string, match: $0) }
     }
     
     /**
@@ -360,13 +362,12 @@ public class re {
       guard let regex = regex else {
         return (string, 0)
       }
-      let options = NSMatchingOptions(rawValue: 0)
       let range = NSRange(location: 0, length: string.characters.count)
       let mutable = NSMutableString(string: string)
       let maxCount = count == 0 ? Int.max : (count > 0 ? count : 0)
       var n = 0
       var offset = 0
-      regex.enumerateMatchesInString(string, options: options, range: range) { result, _, stop in
+      regex.enumerateMatchesInString(string, options: defaultMatchingOptions, range: range) { result, _, stop in
         if maxCount <= n {
           stop.memory = true
           return
@@ -375,7 +376,7 @@ public class re {
           n++
           let resultRange = NSRange(location: result.range.location + offset, length: result.range.length)
           let lengthBeforeReplace = mutable.length
-          regex.replaceMatchesInString(mutable, options: options, range: resultRange, withTemplate: repl)
+          regex.replaceMatchesInString(mutable, options: self.defaultMatchingOptions, range: resultRange, withTemplate: repl)
           offset += mutable.length - lengthBeforeReplace
         }
       }
@@ -387,14 +388,14 @@ public class re {
   /**
   *  Counterpart of Python's re.MatchObject
   */
-  public class MatchObject {
+  public final class MatchObject {
     /// String matched
     public let string: String
     
     /// Underlying NSTextCheckingResult
-    public let match: NSTextCheckingResult?
+    public let match: NSTextCheckingResult
     
-    init(string: String, match: NSTextCheckingResult?) {
+    init(string: String, match: NSTextCheckingResult) {
       self.string = string
       self.match = match
     }
@@ -411,9 +412,6 @@ public class re {
     :returns: expanded string
     */
     public func expand(template: String) -> String {
-      guard let match = match else {
-        return ""
-      }
       guard let regex = match.regularExpression else {
         return ""
       }
@@ -451,7 +449,7 @@ public class re {
     :returns: array of strings of the matching groups
     */
     public func group(indexes: [Int]) -> [String?] {
-      return indexes.map({group($0)})
+      return indexes.map { group($0) }
     }
     
     /**
@@ -466,15 +464,7 @@ public class re {
     :returns: array of all matching subgroups as String
     */
     public func groups(defaultValue: String) -> [String] {
-      guard let match = match else {
-        return []
-      }
-      return (1..<match.numberOfRanges).map({
-        if let string: String = group($0) {
-          return string
-        }
-        return defaultValue
-      })
+      return (1..<match.numberOfRanges).map { group($0) ?? defaultValue }
     }
     
     /**
@@ -487,10 +477,7 @@ public class re {
     :returns: array of all matching subgroups as String? (nil when relevant optional capture group is not matched)
     */
     public func groups() -> [String?] {
-      guard let match = match else {
-        return []
-      }
-      return (1..<match.numberOfRanges).map({group($0)})
+      return (1..<match.numberOfRanges).map { group($0) }
     }
     
     /**
@@ -503,20 +490,17 @@ public class re {
     :returns: range of matching group substring
     */
     public func span(index: Int = 0) -> Range<String.Index>? {
-      guard let match = match else {
-        return nil
-      }
       if index >= match.numberOfRanges {
         return nil
       }
-      let range = match.rangeAtIndex(index)
+      let nsrange = match.rangeAtIndex(index)
       
-      if range.location == NSNotFound {
+      if nsrange.location == NSNotFound {
         return string.endIndex..<string.endIndex
       }
       
-      let startIndex = advance(string.startIndex, range.location)
-      let endIndex = advance(startIndex, range.length)
+      let startIndex = advance(string.startIndex, nsrange.location)
+      let endIndex = advance(startIndex, nsrange.length)
       return startIndex..<endIndex
     }
   }

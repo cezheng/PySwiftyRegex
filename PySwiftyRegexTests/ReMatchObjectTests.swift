@@ -44,6 +44,15 @@ class ReMatchObjectTests: XCTestCase {
     XCTAssertEqual(groups[1]!, "1632")
   }
   
+  func testGroupsWithNoGroup() {
+    let m = re.match("\\d+\\.\\d+", "24.1632")
+    XCTAssertNotNil(m)
+    let match = m!
+    XCTAssertEqual(match.string, "24.1632")
+    let groups = match.groups()
+    XCTAssertTrue(groups.isEmpty)
+  }
+  
   func testGroupsWithDefault() {
     let m = re.match("(\\d+)\\.?(\\d+)?", "24")
     XCTAssertNotNil(m)
