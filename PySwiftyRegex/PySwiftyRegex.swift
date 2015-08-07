@@ -32,11 +32,11 @@ public class re {
   See https://docs.python.org/2/library/re.html#re.compile
   
   :param: pattern regular expression pattern string
-  :param: flags   Array of NSRegularExpressionOptions objects
+  :param: flags   NSRegularExpressionOptions value
   
   :returns: The created RegexObject object. If the pattern is invalid, RegexObject.isValid is false, and all methods have a default return value.
   */
-  public static func compile(pattern: String, flags: [RegexObject.Flag] = []) -> RegexObject  {
+  public static func compile(pattern: String, flags: RegexObject.Flag = []) -> RegexObject  {
     return RegexObject(pattern: pattern, flags: flags)
   }
   
@@ -47,11 +47,11 @@ public class re {
   
   :param: pattern regular expression pattern string
   :param: string  string to be searched
-  :param: flags   Array of NSRegularExpressionOptions objects
+  :param: flags   NSRegularExpressionOptions value
   
   :returns: Corresponding MatchObject instance. Return nil if no position in the string matches the pattern or pattern is invalid; note that this is different from finding a zero-length match at some point in the string.
   */
-  public static func search(pattern: String, _ string: String, flags: [RegexObject.Flag] = []) -> MatchObject? {
+  public static func search(pattern: String, _ string: String, flags: RegexObject.Flag = []) -> MatchObject? {
     return re.compile(pattern, flags: flags).search(string)
   }
   
@@ -62,11 +62,11 @@ public class re {
   
   :param: pattern regular expression pattern string
   :param: string  string to be searched
-  :param: flags   Array of NSRegularExpressionOptions objects
+  :param: flags   NSRegularExpressionOptions value
   
   :returns:   Corresponding MatchObject instance. Return nil if the string does not match the pattern or pattern is invalid; note that this is different from a zero-length match.
   */
-  public static func match(pattern: String, _ string: String, flags: [RegexObject.Flag] = []) -> MatchObject? {
+  public static func match(pattern: String, _ string: String, flags: RegexObject.Flag = []) -> MatchObject? {
     return re.compile(pattern, flags: flags).match(string)
   }
   
@@ -78,11 +78,11 @@ public class re {
   :param: pattern  regular expression pattern string
   :param: string   string to be splitted
   :param: maxsplit maximum number of times to split the string, defaults to 0, meaning no limit is applied
-  :param: flags    Array of NSRegularExpressionOptions objects
+  :param: flags    NSRegularExpressionOptions value
   
   :returns: Array of splitted strings
   */
-  public static func split(pattern: String, _ string: String, _ maxsplit: Int = 0, flags: [RegexObject.Flag] = []) -> [String?] {
+  public static func split(pattern: String, _ string: String, _ maxsplit: Int = 0, flags: RegexObject.Flag = []) -> [String?] {
     return re.compile(pattern, flags: flags).split(string, maxsplit)
   }
 
@@ -93,11 +93,11 @@ public class re {
   
   :param: pattern regular expression pattern string
   :param: string  string to be searched
-  :param: flags   Array of NSRegularExpressionOptions objects
+  :param: flags   NSRegularExpressionOptions value
   
   :returns: Array of matched substrings
   */
-  public static func findall(pattern: String, _ string: String, flags: [RegexObject.Flag] = []) -> [String] {
+  public static func findall(pattern: String, _ string: String, flags: RegexObject.Flag = []) -> [String] {
     return re.compile(pattern, flags: flags).findall(string)
   }
   
@@ -108,11 +108,11 @@ public class re {
   
   :param: pattern regular expression pattern string
   :param: string  string to be searched
-  :param: flags   Array of NSRegularExpressionOptions objects
+  :param: flags   NSRegularExpressionOptions value
   
   :returns: Array of match results as MatchObject instances
   */
-  public static func finditer(pattern: String, _ string: String, flags: [RegexObject.Flag] = []) -> [MatchObject] {
+  public static func finditer(pattern: String, _ string: String, flags: RegexObject.Flag = []) -> [MatchObject] {
     return re.compile(pattern, flags: flags).finditer(string)
   }
   
@@ -125,11 +125,11 @@ public class re {
   :param: repl    replacement string
   :param: string  string to be searched and replaced
   :param: count   maximum number of times to perform replace operations to the string
-  :param: flags   Array of NSRegularExpressionOptions objects
+  :param: flags   NSRegularExpressionOptions value
   
   :returns: replaced string
   */
-  public static func sub(pattern: String, _ repl: String, _ string: String, _ count: Int = 0, flags: [RegexObject.Flag] = []) -> String {
+  public static func sub(pattern: String, _ repl: String, _ string: String, _ count: Int = 0, flags: RegexObject.Flag = []) -> String {
     return re.compile(pattern, flags: flags).sub(repl, string, count)
   }
   
@@ -142,11 +142,11 @@ public class re {
   :param: repl    replacement string
   :param: string  string to be searched and replaced
   :param: count   maximum number of times to perform replace operations to the string
-  :param: flags   Array of NSRegularExpressionOptions objects
+  :param: flags   NSRegularExpressionOptions value
   
   :returns: a tuple (new_string, number_of_subs_made) as (String, Int)
   */
-  public static func subn(pattern: String, _ repl: String, _ string: String, _ count: Int = 0, flags: [RegexObject.Flag] = []) -> (String, Int) {
+  public static func subn(pattern: String, _ repl: String, _ string: String, _ count: Int = 0, flags: RegexObject.Flag = []) -> (String, Int) {
     return re.compile(pattern, flags: flags).subn(repl, string, count)
   }
   
@@ -183,21 +183,18 @@ public class re {
       return regex?.numberOfCaptureGroups ?? 0
     }
     
-    private let defaultMatchingOptions = NSMatchingOptions(rawValue: 0)
-    
     /**
     Create A re.RegexObject Instance
     
     :param: pattern regular expression pattern string
-    :param: flags   Array of NSRegularExpressionOptions objects
+    :param: flags   NSRegularExpressionOptions value
     
     :returns: The created RegexObject object. If the pattern is invalid, RegexObject.isValid is false, and all methods have a default return value.
     */
-    public required init(pattern: String, flags: [Flag] = [])  {
+    public required init(pattern: String, flags: Flag = [])  {
       self.pattern = pattern
-      let options = Flag(rawValue: flags.reduce(0) {$0 | $1.rawValue})
       do {
-        self.regex = try NSRegularExpression(pattern: pattern, options: options)
+        self.regex = try NSRegularExpression(pattern: pattern, options: flags)
       } catch let error as NSError {
         self.regex = nil
         print(error)
@@ -212,11 +209,11 @@ public class re {
     :param: string  string to be searched
     :param: pos     position in string where the search is to start, defaults to 0
     :param: endpos  position in string where the search it to end (non-inclusive), defaults to nil, meaning the end of the string. If endpos is less than pos, no match will be found.
-    :param: options Array of NSMatchOptions objects
+    :param: options NSMatchOptions value
     
     :returns: search result as MatchObject instance if a match is found, otherwise return nil
     */
-    public func search(string: String, _ pos: Int = 0, _ endpos: Int? = nil, options: [NSMatchingOptions] = []) -> MatchObject? {
+    public func search(string: String, _ pos: Int = 0, _ endpos: Int? = nil, options: NSMatchingOptions = []) -> MatchObject? {
       guard let regex = regex else {
         return nil
       }
@@ -224,7 +221,6 @@ public class re {
       let end = endpos ?? string.characters.count
       let length = max(0, end - start)
       let range = NSRange(location: start, length: length)
-      let options = NSMatchingOptions(rawValue: options.reduce(0) {$0 | $1.rawValue})
       let match = regex.firstMatchInString(string, options: options, range: range)
       if let match = match {
         return MatchObject(string: string, match: match)
@@ -266,7 +262,7 @@ public class re {
       var results = [String?]()
       var start = string.startIndex
       var end = string.startIndex
-      regex.enumerateMatchesInString(string, options: defaultMatchingOptions, range: range) { result, _, stop in
+      regex.enumerateMatchesInString(string, options: [], range: range) { result, _, stop in
         if splitsLeft <= 0 {
           stop.memory = true
           return
@@ -329,7 +325,7 @@ public class re {
       let end = endpos ?? string.characters.count
       let length = max(0, end - start)
       let range = NSRange(location: start, length: length)
-      return regex.matchesInString(string, options: defaultMatchingOptions, range: range).map { MatchObject(string: string, match: $0) }
+      return regex.matchesInString(string, options: [], range: range).map { MatchObject(string: string, match: $0) }
     }
     
     /**
@@ -367,7 +363,7 @@ public class re {
       let maxCount = count == 0 ? Int.max : (count > 0 ? count : 0)
       var n = 0
       var offset = 0
-      regex.enumerateMatchesInString(string, options: defaultMatchingOptions, range: range) { result, _, stop in
+      regex.enumerateMatchesInString(string, options: [], range: range) { result, _, stop in
         if maxCount <= n {
           stop.memory = true
           return
@@ -376,7 +372,7 @@ public class re {
           n++
           let resultRange = NSRange(location: result.range.location + offset, length: result.range.length)
           let lengthBeforeReplace = mutable.length
-          regex.replaceMatchesInString(mutable, options: self.defaultMatchingOptions, range: resultRange, withTemplate: repl)
+          regex.replaceMatchesInString(mutable, options: [], range: resultRange, withTemplate: repl)
           offset += mutable.length - lengthBeforeReplace
         }
       }
@@ -430,10 +426,7 @@ public class re {
     :returns: string of the matching group
     */
     public func group(index: Int = 0) -> String? {
-      guard let range = span(index) else {
-        return nil
-      }
-      if range.startIndex == string.endIndex {
+      guard let range = span(index) where range.startIndex < string.endIndex else {
         return nil
       }
       return string.substringWithRange(range)
