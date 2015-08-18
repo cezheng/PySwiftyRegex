@@ -267,23 +267,18 @@ public class re {
           stop.memory = true
           return
         }
-        let length: Int
-        if let result = result {
-          end = advance(string.startIndex, result.range.location)
-          length = result.range.length
-        } else {
-          end = string.endIndex
-          length = 0
-        }
-        if length == 0 {
+
+        guard let result = result where result.range.length > 0 else {
           return
         }
+        
+        end = advance(string.startIndex, result.range.location)
         results.append(string.substringWithRange(start..<end))
         if regex.numberOfCaptureGroups > 0 {
-          results.extend(MatchObject(string: string, match: result!).groups())
+          results.extend(MatchObject(string: string, match: result).groups())
         }
         splitsLeft--
-        start = advance(end, length)
+        start = advance(end, result.range.length)
       }
       if start <= string.endIndex {
         results.append(string.substringWithRange(start..<string.endIndex))
