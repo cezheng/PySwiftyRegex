@@ -47,9 +47,9 @@ class ReRegexObjectTests: XCTestCase {
     XCTAssertEqual(match.group()!, "this one is different from that")
     XCTAssertEqual(match.group(1)!, "this")
     XCTAssertEqual(match.group(2)!, "that")
-    XCTAssertEqual(match.span()!, string.startIndex..<advance(string.startIndex, 31))
-    XCTAssertEqual(match.span(1)!, string.startIndex..<advance(string.startIndex, 4))
-    XCTAssertEqual(match.span(2)!, advance(string.startIndex, 27)..<advance(string.startIndex, 31))
+    XCTAssertEqual(match.span()!, string.startIndex..<string.startIndex.advancedBy(31))
+    XCTAssertEqual(match.span(1)!, string.startIndex..<string.startIndex.advancedBy(4))
+    XCTAssertEqual(match.span(2)!, string.startIndex.advancedBy(27)..<string.startIndex.advancedBy(31))
   }
   
   func testMatchWithRangeSuccess() {
@@ -62,9 +62,9 @@ class ReRegexObjectTests: XCTestCase {
     XCTAssertEqual(match.group()!, "this one is different from that on")
     XCTAssertEqual(match.group(1)!, "this")
     XCTAssertEqual(match.group(2)!, "that")
-    XCTAssertEqual(match.span()!, advance(string.startIndex, 4)..<advance(string.startIndex, 38))
-    XCTAssertEqual(match.span(1)!, advance(string.startIndex, 4)..<advance(string.startIndex, 8))
-    XCTAssertEqual(match.span(2)!, advance(string.startIndex, 31)..<advance(string.startIndex, 35))
+    XCTAssertEqual(match.span()!, string.startIndex.advancedBy(4)..<string.startIndex.advancedBy(38))
+    XCTAssertEqual(match.span(1)!, string.startIndex.advancedBy(4)..<string.startIndex.advancedBy(8))
+    XCTAssertEqual(match.span(2)!, string.startIndex.advancedBy(31)..<string.startIndex.advancedBy(35))
   }
   
   func testMatchFailure() {
@@ -84,9 +84,9 @@ class ReRegexObjectTests: XCTestCase {
     XCTAssertEqual(match.group()!, "this one is different from that")
     XCTAssertEqual(match.group(1)!, "this")
     XCTAssertEqual(match.group(2)!, "that")
-    XCTAssertEqual(match.span()!, string.startIndex..<advance(string.startIndex, 31))
-    XCTAssertEqual(match.span(1)!, string.startIndex..<advance(string.startIndex, 4))
-    XCTAssertEqual(match.span(2)!, advance(string.startIndex, 27)..<advance(string.startIndex, 31))
+    XCTAssertEqual(match.span()!, string.startIndex..<string.startIndex.advancedBy(31))
+    XCTAssertEqual(match.span(1)!, string.startIndex..<string.startIndex.advancedBy(4))
+    XCTAssertEqual(match.span(2)!, string.startIndex.advancedBy(27)..<string.startIndex.advancedBy(31))
   }
   
   func testSearchWithRangeSuccess() {
@@ -99,9 +99,9 @@ class ReRegexObjectTests: XCTestCase {
     XCTAssertEqual(match.group()!, "this one is different from that on")
     XCTAssertEqual(match.group(1)!, "this")
     XCTAssertEqual(match.group(2)!, "that")
-    XCTAssertEqual(match.span()!, advance(string.startIndex, 4)..<advance(string.startIndex, 38))
-    XCTAssertEqual(match.span(1)!, advance(string.startIndex, 4)..<advance(string.startIndex, 8))
-    XCTAssertEqual(match.span(2)!, advance(string.startIndex, 31)..<advance(string.startIndex, 35))
+    XCTAssertEqual(match.span()!, string.startIndex.advancedBy(4)..<string.startIndex.advancedBy(38))
+    XCTAssertEqual(match.span(1)!, string.startIndex.advancedBy(4)..<string.startIndex.advancedBy(8))
+    XCTAssertEqual(match.span(2)!, string.startIndex.advancedBy(31)..<string.startIndex.advancedBy(35))
   }
   
   func testSearchNestGroupsSuccess() {
@@ -116,11 +116,11 @@ class ReRegexObjectTests: XCTestCase {
     XCTAssertEqual(match.group(2)!, "this ")
     XCTAssertEqual(match.group(3)!, " that that that ")
     XCTAssertEqual(match.group(4)!, "that ")
-    XCTAssertEqual(match.span()!, string.startIndex..<advance(string.startIndex, 52))
-    XCTAssertEqual(match.span(1)!, string.startIndex..<advance(string.startIndex, 15))
-    XCTAssertEqual(match.span(2)!, advance(string.startIndex, 10)..<advance(string.startIndex, 15))
-    XCTAssertEqual(match.span(3)!, advance(string.startIndex, 36)..<advance(string.startIndex, 52))
-    XCTAssertEqual(match.span(4)!, advance(string.startIndex, 47)..<advance(string.startIndex, 52))
+    XCTAssertEqual(match.span()!, string.startIndex..<string.startIndex.advancedBy(52))
+    XCTAssertEqual(match.span(1)!, string.startIndex..<string.startIndex.advancedBy(15))
+    XCTAssertEqual(match.span(2)!, string.startIndex.advancedBy(10)..<string.startIndex.advancedBy(15))
+    XCTAssertEqual(match.span(3)!, string.startIndex.advancedBy(36)..<string.startIndex.advancedBy(52))
+    XCTAssertEqual(match.span(4)!, string.startIndex.advancedBy(47)..<string.startIndex.advancedBy(52))
   }
   
   func testFindallSuccess() {

@@ -272,13 +272,13 @@ public class re {
           return
         }
         
-        end = advance(string.startIndex, result.range.location)
+        end = string.startIndex.advancedBy(result.range.location)
         results.append(string.substringWithRange(start..<end))
         if regex.numberOfCaptureGroups > 0 {
-          results.extend(MatchObject(string: string, match: result).groups())
+          results.appendContentsOf(MatchObject(string: string, match: result).groups())
         }
         splitsLeft--
-        start = advance(end, result.range.length)
+        start = end.advancedBy(result.range.length)
       }
       if start <= string.endIndex {
         results.append(string.substringWithRange(start..<string.endIndex))
@@ -486,9 +486,8 @@ public class re {
       if nsrange.location == NSNotFound {
         return string.endIndex..<string.endIndex
       }
-      
-      let startIndex = advance(string.startIndex, nsrange.location)
-      let endIndex = advance(startIndex, nsrange.length)
+      let startIndex = string.startIndex.advancedBy(nsrange.location)
+      let endIndex = startIndex.advancedBy(nsrange.length)
       return startIndex..<endIndex
     }
   }
