@@ -31,10 +31,10 @@ public class re {
   
   See https://docs.python.org/2/library/re.html#re.compile
   
-  :param: pattern regular expression pattern string
-  :param: flags   NSRegularExpressionOptions value
+  - parameter pattern: regular expression pattern string
+  - parameter flags:   NSRegularExpressionOptions value
   
-  :returns: The created RegexObject object. If the pattern is invalid, RegexObject.isValid is false, and all methods have a default return value.
+  - returns: The created RegexObject object. If the pattern is invalid, RegexObject.isValid is false, and all methods have a default return value.
   */
   public static func compile(pattern: String, flags: RegexObject.Flag = []) -> RegexObject  {
     return RegexObject(pattern: pattern, flags: flags)
@@ -45,11 +45,11 @@ public class re {
   
   See https://docs.python.org/2/library/re.html#re.search
   
-  :param: pattern regular expression pattern string
-  :param: string  string to be searched
-  :param: flags   NSRegularExpressionOptions value
+  - parameter pattern: regular expression pattern string
+  - parameter string:  string to be searched
+  - parameter flags:   NSRegularExpressionOptions value
   
-  :returns: Corresponding MatchObject instance. Return nil if no position in the string matches the pattern or pattern is invalid; note that this is different from finding a zero-length match at some point in the string.
+  - returns: Corresponding MatchObject instance. Return nil if no position in the string matches the pattern or pattern is invalid; note that this is different from finding a zero-length match at some point in the string.
   */
   public static func search(pattern: String, _ string: String, flags: RegexObject.Flag = []) -> MatchObject? {
     return re.compile(pattern, flags: flags).search(string)
@@ -60,11 +60,11 @@ public class re {
   
   See https://docs.python.org/2/library/re.html#re.match
   
-  :param: pattern regular expression pattern string
-  :param: string  string to be searched
-  :param: flags   NSRegularExpressionOptions value
+  - parameter pattern: regular expression pattern string
+  - parameter string:  string to be searched
+  - parameter flags:   NSRegularExpressionOptions value
   
-  :returns:   Corresponding MatchObject instance. Return nil if the string does not match the pattern or pattern is invalid; note that this is different from a zero-length match.
+  - returns: Corresponding MatchObject instance. Return nil if the string does not match the pattern or pattern is invalid; note that this is different from a zero-length match.
   */
   public static func match(pattern: String, _ string: String, flags: RegexObject.Flag = []) -> MatchObject? {
     return re.compile(pattern, flags: flags).match(string)
@@ -75,12 +75,12 @@ public class re {
   
   See https://docs.python.org/2/library/re.html#re.split
   
-  :param: pattern  regular expression pattern string
-  :param: string   string to be splitted
-  :param: maxsplit maximum number of times to split the string, defaults to 0, meaning no limit is applied
-  :param: flags    NSRegularExpressionOptions value
+  - parameter pattern:  regular expression pattern string
+  - parameter string:   string to be splitted
+  - parameter maxsplit: maximum number of times to split the string, defaults to 0, meaning no limit is applied
+  - parameter flags:    NSRegularExpressionOptions value
   
-  :returns: Array of splitted strings
+  - returns: Array of splitted strings
   */
   public static func split(pattern: String, _ string: String, _ maxsplit: Int = 0, flags: RegexObject.Flag = []) -> [String?] {
     return re.compile(pattern, flags: flags).split(string, maxsplit)
@@ -91,11 +91,11 @@ public class re {
   
   See https://docs.python.org/2/library/re.html#re.findall
   
-  :param: pattern regular expression pattern string
-  :param: string  string to be searched
-  :param: flags   NSRegularExpressionOptions value
+  - parameter pattern: regular expression pattern string
+  - parameter string:  string to be searched
+  - parameter flags:   NSRegularExpressionOptions value
   
-  :returns: Array of matched substrings
+  - returns: Array of matched substrings
   */
   public static func findall(pattern: String, _ string: String, flags: RegexObject.Flag = []) -> [String] {
     return re.compile(pattern, flags: flags).findall(string)
@@ -106,11 +106,11 @@ public class re {
   
   See https://docs.python.org/2/library/re.html#re.finditer
   
-  :param: pattern regular expression pattern string
-  :param: string  string to be searched
-  :param: flags   NSRegularExpressionOptions value
+  - parameter pattern: regular expression pattern string
+  - parameter string:  string to be searched
+  - parameter flags:   NSRegularExpressionOptions value
   
-  :returns: Array of match results as MatchObject instances
+  - returns: Array of match results as MatchObject instances
   */
   public static func finditer(pattern: String, _ string: String, flags: RegexObject.Flag = []) -> [MatchObject] {
     return re.compile(pattern, flags: flags).finditer(string)
@@ -121,13 +121,13 @@ public class re {
   
   See https://docs.python.org/2/library/re.html#re.sub
   
-  :param: pattern regular expression pattern string
-  :param: repl    replacement string
-  :param: string  string to be searched and replaced
-  :param: count   maximum number of times to perform replace operations to the string
-  :param: flags   NSRegularExpressionOptions value
+  - parameter pattern: regular expression pattern string
+  - parameter repl:    replacement string
+  - parameter string:  string to be searched and replaced
+  - parameter count:   maximum number of times to perform replace operations to the string
+  - parameter flags:   NSRegularExpressionOptions value
   
-  :returns: replaced string
+  - returns: replaced string
   */
   public static func sub(pattern: String, _ repl: String, _ string: String, _ count: Int = 0, flags: RegexObject.Flag = []) -> String {
     return re.compile(pattern, flags: flags).sub(repl, string, count)
@@ -138,13 +138,13 @@ public class re {
   
   See https://docs.python.org/2/library/re.html#re.subn
   
-  :param: pattern regular expression pattern string
-  :param: repl    replacement string
-  :param: string  string to be searched and replaced
-  :param: count   maximum number of times to perform replace operations to the string
-  :param: flags   NSRegularExpressionOptions value
+  - parameter pattern: regular expression pattern string
+  - parameter repl:    replacement string
+  - parameter string:  string to be searched and replaced
+  - parameter count:   maximum number of times to perform replace operations to the string
+  - parameter flags:   NSRegularExpressionOptions value
   
-  :returns: a tuple (new_string, number_of_subs_made) as (String, Int)
+  - returns: a tuple (new_string, number_of_subs_made) as (String, Int)
   */
   public static func subn(pattern: String, _ repl: String, _ string: String, _ count: Int = 0, flags: RegexObject.Flag = []) -> (String, Int) {
     return re.compile(pattern, flags: flags).subn(repl, string, count)
@@ -186,10 +186,10 @@ public class re {
     /**
     Create A re.RegexObject Instance
     
-    :param: pattern regular expression pattern string
-    :param: flags   NSRegularExpressionOptions value
+    - parameter pattern: regular expression pattern string
+    - parameter flags:   NSRegularExpressionOptions value
     
-    :returns: The created RegexObject object. If the pattern is invalid, RegexObject.isValid is false, and all methods have a default return value.
+    - returns: The created RegexObject object. If the pattern is invalid, RegexObject.isValid is false, and all methods have a default return value.
     */
     public required init(pattern: String, flags: Flag = [])  {
       self.pattern = pattern
@@ -206,12 +206,12 @@ public class re {
     
     See https://docs.python.org/2/library/re.html#re.RegexObject.search
     
-    :param: string  string to be searched
-    :param: pos     position in string where the search is to start, defaults to 0
-    :param: endpos  position in string where the search it to end (non-inclusive), defaults to nil, meaning the end of the string. If endpos is less than pos, no match will be found.
-    :param: options NSMatchOptions value
+    - parameter string:  string to be searched
+    - parameter pos:     position in string where the search is to start, defaults to 0
+    - parameter endpos:  position in string where the search it to end (non-inclusive), defaults to nil, meaning the end of the string. If endpos is less than pos, no match will be found.
+    - parameter options: NSMatchOptions value
     
-    :returns: search result as MatchObject instance if a match is found, otherwise return nil
+    - returns: search result as MatchObject instance if a match is found, otherwise return nil
     */
     public func search(string: String, _ pos: Int = 0, _ endpos: Int? = nil, options: NSMatchingOptions = []) -> MatchObject? {
       guard let regex = regex else {
@@ -233,11 +233,11 @@ public class re {
     
     See https://docs.python.org/2/library/re.html#re.RegexObject.match
     
-    :param: string string to be matched
-    :param: pos     position in string where the search is to start, defaults to 0
-    :param: endpos  position in string where the search it to end (non-inclusive), defaults to nil, meaning the end of the string. If endpos is less than pos, no match will be found.
+    - parameter string:  string to be matched
+    - parameter pos:     position in string where the search is to start, defaults to 0
+    - parameter endpos:  position in string where the search it to end (non-inclusive), defaults to nil, meaning the end of the string. If endpos is less than pos, no match will be found.
     
-    :returns: match result as MatchObject instance if a match is found, otherwise return nil
+    - returns: match result as MatchObject instance if a match is found, otherwise return nil
     */
     public func match(string: String, _ pos: Int = 0, _ endpos: Int? = nil) -> MatchObject? {
       return search(string, pos, endpos, options: [.Anchored])
@@ -248,10 +248,10 @@ public class re {
     
     See https://docs.python.org/2/library/re.html#re.RegexObject.split
     
-    :param: string   string to be splitted
-    :param: maxsplit maximum number of times to split the string, defaults to 0, meaning no limit is applied
+    - parameter string:   string to be splitted
+    - parameter maxsplit: maximum number of times to split the string, defaults to 0, meaning no limit is applied
     
-    :returns: Array of splitted strings
+    - returns: Array of splitted strings
     */
     public func split(string: String, _ maxsplit: Int = 0) -> [String?] {
       guard let regex = regex else {
@@ -291,11 +291,11 @@ public class re {
     
     See https://docs.python.org/2/library/re.html#re.RegexObject.findall
     
-    :param: string string to be matched
-    :param: pos     position in string where the search is to start, defaults to 0
-    :param: endpos  position in string where the search it to end (non-inclusive), defaults to nil, meaning the end of the string. If endpos is less than pos, no match will be found.
+    - parameter string:  string to be matched
+    - parameter pos:     position in string where the search is to start, defaults to 0
+    - parameter endpos:  position in string where the search it to end (non-inclusive), defaults to nil, meaning the end of the string. If endpos is less than pos, no match will be found.
     
-    :returns: Array of matched substrings
+    - returns: Array of matched substrings
     */
     public func findall(string: String, _ pos: Int = 0, _ endpos: Int? = nil) -> [String] {
       return finditer(string, pos, endpos).map { $0.group()! }
@@ -306,11 +306,11 @@ public class re {
     
     https://docs.python.org/2/library/re.html#re.RegexObject.finditer
     
-    :param: string string to be matched
-    :param: pos     position in string where the search is to start, defaults to 0
-    :param: endpos  position in string where the search it to end (non-inclusive), defaults to nil, meaning the end of the string. If endpos is less than pos, no match will be found.
+    - parameter string:  string to be matched
+    - parameter pos:     position in string where the search is to start, defaults to 0
+    - parameter endpos:  position in string where the search it to end (non-inclusive), defaults to nil, meaning the end of the string. If endpos is less than pos, no match will be found.
     
-    :returns: Array of match results as MatchObject instances
+    - returns: Array of match results as MatchObject instances
     */
     public func finditer(string: String, _ pos: Int = 0, _ endpos: Int? = nil) -> [MatchObject] {
       guard let regex = regex else {
@@ -328,11 +328,11 @@ public class re {
     
     See https://docs.python.org/2/library/re.html#re.RegexObject.sub
     
-    :param: repl    replacement string
-    :param: string  string to be searched and replaced
-    :param: count   maximum number of times to perform replace operations to the string
+    - parameter repl:    replacement string
+    - parameter string:  string to be searched and replaced
+    - parameter count:   maximum number of times to perform replace operations to the string
     
-    :returns: replaced string
+    - returns: replaced string
     */
     public func sub(repl: String, _ string: String, _ count: Int = 0) -> String {
       return subn(repl, string, count).0
@@ -343,11 +343,11 @@ public class re {
     
     See https://docs.python.org/2/library/re.html#re.RegexObject.subn
     
-    :param: repl    replacement string
-    :param: string  string to be searched and replaced
-    :param: count   maximum number of times to perform replace operations to the string
+    - parameter repl:    replacement string
+    - parameter string:  string to be searched and replaced
+    - parameter count:   maximum number of times to perform replace operations to the string
     
-    :returns: a tuple (new_string, number_of_subs_made) as (String, Int)
+    - returns: a tuple (new_string, number_of_subs_made) as (String, Int)
     */
     public func subn(repl: String, _ string: String, _ count: Int = 0) -> (String, Int) {
       guard let regex = regex else {
@@ -398,9 +398,9 @@ public class re {
     
     See https://docs.python.org/2/library/re.html#re.MatchObject.expand
     
-    :param: template regular expression template decribing the expanded format
+    - parameter template: regular expression template decribing the expanded format
     
-    :returns: expanded string
+    - returns: expanded string
     */
     public func expand(template: String) -> String {
       guard let regex = match.regularExpression else {
@@ -416,9 +416,9 @@ public class re {
     
     See https://docs.python.org/2/library/re.html#re.MatchObject.group
     
-    :param: index group index, defaults to 0, meaning the entire matching string
+    - parameter index: group index, defaults to 0, meaning the entire matching string
     
-    :returns: string of the matching group
+    - returns: string of the matching group
     */
     public func group(index: Int = 0) -> String? {
       guard let range = span(index) where range.startIndex < string.endIndex else {
@@ -432,9 +432,9 @@ public class re {
     
     See https://docs.python.org/2/library/re.html#re.MatchObject.group
     
-    :param: indexes array of group indexes to get
+    - parameter indexes: array of group indexes to get
     
-    :returns: array of strings of the matching groups
+    - returns: array of strings of the matching groups
     */
     public func group(indexes: [Int]) -> [String?] {
       return indexes.map { group($0) }
@@ -447,9 +447,9 @@ public class re {
     
     See https://docs.python.org/2/library/re.html#re.MatchObject.groups
     
-    :param: defaultValue default value string
+    - parameter defaultValue: default value string
     
-    :returns: array of all matching subgroups as String
+    - returns: array of all matching subgroups as String
     */
     public func groups(defaultValue: String) -> [String] {
       return (1..<match.numberOfRanges).map { group($0) ?? defaultValue }
@@ -462,7 +462,7 @@ public class re {
     
     See https://docs.python.org/2/library/re.html#re.MatchObject.groups
     
-    :returns: array of all matching subgroups as String? (nil when relevant optional capture group is not matched)
+    - returns: array of all matching subgroups as String? (nil when relevant optional capture group is not matched)
     */
     public func groups() -> [String?] {
       return (1..<match.numberOfRanges).map { group($0) }
@@ -473,9 +473,9 @@ public class re {
     
     See https://docs.python.org/2/library/re.html#re.MatchObject.span
     
-    :param: index group index
+    - parameter index: group index
     
-    :returns: range of matching group substring
+    - returns: range of matching group substring
     */
     public func span(index: Int = 0) -> Range<String.Index>? {
       if index >= match.numberOfRanges {
