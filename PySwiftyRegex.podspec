@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "PySwiftyRegex"
-  s.version      = "0.1.3"
+  s.version      = "0.1.4"
   s.license      = "MIT"
   s.summary      = "Easily deal with Regex in Swift in a Pythonic way"
   s.homepage     = "https://github.com/cezheng/PySwiftyRegex"
@@ -10,6 +10,7 @@ Pod::Spec.new do |s|
   
   s.ios.deployment_target = "8.0"
   s.osx.deployment_target = "10.9"
+  s.watchos.deployment_target = "2.0"
 
   s.source_files  = "PySwiftyRegex/*.swift"
 
