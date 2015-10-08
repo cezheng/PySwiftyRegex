@@ -1,6 +1,7 @@
 # PySwiftyRegex
 [![Cocoapods Compatible](https://img.shields.io/cocoapods/v/PySwiftyRegex.svg)](https://cocoapods.org/pods/PySwiftyRegex)
 [![License](https://img.shields.io/cocoapods/l/PySwiftyRegex.svg?style=flat&color=gray)](http://opensource.org/licenses/MIT)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Platform](https://img.shields.io/cocoapods/p/PySwiftyRegex.svg?style=flat)](http://cocoadocs.org/docsets/PySwiftyRegex)
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
 
@@ -48,6 +49,19 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
+
+### Carthage(iOS 8+, OS X 10.9+)
+Adding the following line to your `Cartfile` or `Cartfile.private`:
+
+```
+github "cezheng/PySwiftyRegex" ~> 0.1.0
+```
+Run the following command:
+
+```
+$ carthage update
+```
+Then drag the `PySwiftyRegex.framework` built by Carthage into your target's `General` -> `Embedded Binaries`.
 
 ## Supported re methods
 If you are familiar with Python's [**re**](https://docs.python.org/2/library/re.html) module, you are ready to go. If not, you may like to check how Python's re is better than the cumbersome NSRegularExpression's APIs, by clicking at the items below.

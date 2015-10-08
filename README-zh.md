@@ -1,6 +1,7 @@
 # PySwiftyRegex
 [![Cocoapods Compatible](https://img.shields.io/cocoapods/v/PySwiftyRegex.svg)](https://cocoapods.org/pods/PySwiftyRegex)
 [![License](https://img.shields.io/cocoapods/l/PySwiftyRegex.svg?style=flat&color=gray)](http://opensource.org/licenses/MIT)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Platform](https://img.shields.io/cocoapods/p/PySwiftyRegex.svg?style=flat)](http://cocoadocs.org/docsets/PySwiftyRegex)
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
 
@@ -48,6 +49,19 @@ end
 ```bash
 $ pod install
 ```
+
+### Carthage(iOS 8+, OS X 10.9+)
+往 `Cartfile` 或 `Cartfile.private` 中加入如下一行:
+
+```
+github "cezheng/PySwiftyRegex" ~> 0.1.0
+```
+然后执行如下命令:
+
+```
+$ carthage update
+```
+最后将Carthage编译出来的`PySwiftyRegex.framework`拖拽入目标的`General` -> `Embedded Binaries`。
 
 ## 已实现的re模块方法
 如果您已有 [**re**](https://docs.python.org/2/library/re.html) 模块的使用经验, 那么基本上将这个库导入到项目中就可以直接开始用了。 如果没有，或许可以点击下方的链接传送到Python的文档页面大致了解一下为何re模块会比NSRegualarExpression的API更加好用。

@@ -1,6 +1,7 @@
 # PySwiftyRegex
 [![Cocoapods Compatible](https://img.shields.io/cocoapods/v/PySwiftyRegex.svg)](https://cocoapods.org/pods/PySwiftyRegex)
 [![License](https://img.shields.io/cocoapods/l/PySwiftyRegex.svg?style=flat&color=gray)](http://opensource.org/licenses/MIT)
+[![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![Platform](https://img.shields.io/cocoapods/p/PySwiftyRegex.svg?style=flat)](http://cocoadocs.org/docsets/PySwiftyRegex)
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
 
@@ -48,6 +49,19 @@ end
 ```bash
 $ pod install
 ```
+
+### Carthage(iOS 8+, OS X 10.9+)
+下記の行を `Cartfile` か `Cartfile.private` かに追加してください:
+
+```
+github "cezheng/PySwiftyRegex" ~> 0.1.0
+```
+そして、下記のコマンドを実行してください:
+
+```
+$ carthage update
+```
+最後に、ビルドターゲットの`General` -> `Embedded Binaries`に、Carthageがビルドした`PySwiftyRegex.framework`を追加してください。
 
 ## 対応したreメソッド
 [**re**](https://docs.python.org/2/library/re.html) モデルを使ったことがあれば, すぐこのライブラリーをご利用できると思います。もしなかったら、下記のPythonドキュメントのリンクをご覧いただけると、このシンプルなモデルに一目惚れするかもしれませんw
