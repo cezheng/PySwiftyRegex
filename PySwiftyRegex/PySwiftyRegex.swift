@@ -175,7 +175,7 @@ public class re {
     
     /// NSRegularExpressionOptions used to contructor this RegexObject
     public var flags: Flag {
-      return regex?.options ?? Flag(rawValue: 0)
+      return regex?.options ?? []
     }
     
     /// Number of capturing groups
@@ -197,7 +197,7 @@ public class re {
         self.regex = try NSRegularExpression(pattern: pattern, options: flags)
       } catch let error as NSError {
         self.regex = nil
-        print(error)
+        debugPrint(error)
       }
     }
     
@@ -221,8 +221,7 @@ public class re {
       let end = endpos ?? string.characters.count
       let length = max(0, end - start)
       let range = NSRange(location: start, length: length)
-      let match = regex.firstMatchInString(string, options: options, range: range)
-      if let match = match {
+      if let match = regex.firstMatchInString(string, options: options, range: range) {
         return MatchObject(string: string, match: match)
       }
       return nil
@@ -273,15 +272,15 @@ public class re {
         }
         
         end = string.startIndex.advancedBy(result.range.location)
-        results.append(string.substringWithRange(start..<end))
+        results.append(string[start..<end])
         if regex.numberOfCaptureGroups > 0 {
-          results.appendContentsOf(MatchObject(string: string, match: result).groups())
+          results += MatchObject(string: string, match: result).groups()
         }
         splitsLeft--
         start = end.advancedBy(result.range.length)
       }
       if start <= string.endIndex {
-        results.append(string.substringWithRange(start..<string.endIndex))
+        results.append(string[start..<string.endIndex])
       }
       return results
     }
@@ -424,7 +423,7 @@ public class re {
       guard let range = span(index) where range.startIndex < string.endIndex else {
         return nil
       }
-      return string.substringWithRange(range)
+      return string[range]
     }
     
     /**
