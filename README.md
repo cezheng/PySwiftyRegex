@@ -146,3 +146,6 @@ regex.subn("u", "You guys go grap your food", 1) // ("u guys go grap your food",
 ## License
 
 `PySwiftyRegex` is released under the MIT license. See [LICENSE](https://github.com/cezheng/PySwiftyRegex/blob/master/LICENSE) for details.
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/cezheng/pyswiftyregex/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
