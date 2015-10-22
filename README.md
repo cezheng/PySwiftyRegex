@@ -24,7 +24,7 @@ See [More examples](#more_usage).
 ## Requirements
 
 - iOS 7.0+ / Mac OS X 10.9+
-- Xcode 7.0
+- Xcode 7.0+
 
 
 ## Installation
@@ -40,7 +40,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MyApp' do
-	pod 'PySwiftyRegex', '~> 0.1.0'
+	pod 'PySwiftyRegex', '~> 0.2.0'
 end
 ```
 
@@ -54,7 +54,7 @@ $ pod install
 Adding the following line to your `Cartfile` or `Cartfile.private`:
 
 ```
-github "cezheng/PySwiftyRegex" ~> 0.1.0
+github "cezheng/PySwiftyRegex" ~> 0.2.0
 ```
 Run the following command:
 

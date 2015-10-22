@@ -25,7 +25,7 @@ if let m = re.search("[Tt]his is (.*?)easy", "I think this is really easy!!!") {
 ## 環境
 
 - iOS 7.0+ / Mac OS X 10.9+
-- Xcode 7.0
+- Xcode 7.0+
 
 ## インストール
 > **Embedded frameworks を使うには iOS 8 または OS X Mavericks 以上は必要です**
@@ -40,7 +40,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MyApp' do
-	pod 'PySwiftyRegex', '~> 0.1.0'
+	pod 'PySwiftyRegex', '~> 0.2.0'
 end
 ```
 
@@ -54,7 +54,7 @@ $ pod install
 下記の行を `Cartfile` か `Cartfile.private` かに追加してください:
 
 ```
-github "cezheng/PySwiftyRegex" ~> 0.1.0
+github "cezheng/PySwiftyRegex" ~> 0.2.0
 ```
 そして、下記のコマンドを実行してください:
 
