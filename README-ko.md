@@ -5,13 +5,13 @@
 [![Platform](https://img.shields.io/cocoapods/p/PySwiftyRegex.svg?style=flat)](http://cocoadocs.org/docsets/PySwiftyRegex)
 [![Twitter](https://img.shields.io/badge/twitter-@AdamoCheng-blue.svg?style=flat)](http://twitter.com/AdamoCheng)
 
-Easily deal with Regex in Swift in a Pythonic way.
+Swift에서 정규표현식을 Python처럼 쉽게 다뤄보세요.
 
+[English](README.md)
 [简体中文](https://github.com/cezheng/PySwiftyRegex/blob/master/README-zh.md)
 [日本語](https://github.com/cezheng/PySwiftyRegex/blob/master/README-ja.md)
-[한국어](README-ko.md)
 
-## This is Easy
+## 굉장히 쉽습니다
 
 ```swift
 import PySwiftyRegex
@@ -21,21 +21,22 @@ if let m = re.search("[Tt]his is (.*?)easy", "I think this is really easy!!!") {
 	m.group(1) // "really "
 }
 ```
-See [More examples](#more_usage).
 
-## Requirements
+아래에서 [더 많은 예제](#more_usage)를 볼 수 있습니다.
+
+## 요구사항
 
 - iOS 7.0+ / Mac OS X 10.9+
 - Xcode 7.0+
 
-
-## Installation
-> **Embedded frameworks require a minimum deployment target of iOS 8 or OS X Mavericks.**
+## 설치하기
+> **임베드된 프레임워크를 사용하려면 iOS 8 또는 OS X Mavericks 이상을 지원해야 합니다.**
 >
-> To use `PySwiftyRegex` with a project targeting iOS 7, consider using [CocoaSeeds](#cocoaseeds-for-ios7) or copy the [PySwiftyRegex.swift](https://github.com/cezheng/PySwiftyRegex/blob/master/PySwiftyRegex/PySwiftyRegex.swift) file into your project.
+> `PySwiftyRegex`을 iOS 7 타겟 프로젝트에서 사용하려면 [CocoaSeeds](#cocoaseeds-for-ios7)를 사용하거나 혹은 [PySwiftyRegex.swift](https://github.com/cezheng/PySwiftyRegex/blob/master/PySwiftyRegex/PySwiftyRegex.swift) 파일을 다운받아 프로젝트에 직접 포함시켜야 합니다.
 
-### CocoaPods(iOS 8+, OS X 10.9+)
-You can use [Cocoapods](http://cocoapods.org/) to install `PySwiftyRegex` by adding it to your to your `Podfile`:
+### CocoaPods (iOS 8+, OS X 10.9+)
+
+[CocoaPods](http://cocoapods.org/)를 사용해서 `PySwiftyRegex`를 쉽게 설치할 수 있습니다. 다음과 같은 내용의 **Podfile**을 만들어주세요.
 
 ```ruby
 platform :ios, '8.0'
@@ -46,30 +47,33 @@ target 'MyApp' do
 end
 ```
 
-Then, run the following command:
+그리고 쉘에서 아래 명령어를 실행하면 설치됩니다.
 
 ```bash
 $ pod install
 ```
 
-### Carthage(iOS 8+, OS X 10.9+)
-Adding the following line to your `Cartfile` or `Cartfile.private`:
+### Carthage (iOS 8+, OS X 10.9+)
+
+**Cartfile** 또는 **Cartfile.private**에 아래 라인을 추가합니다.
 
 ```
 github "cezheng/PySwiftyRegex" ~> 0.2.0
 ```
-Run the following command:
+
+그리고 쉘에서 다음 명령어를 실행합니다.
 
 ```
 $ carthage update
 ```
-Then drag the `PySwiftyRegex.framework` built by Carthage into your target's `General` -> `Embedded Binaries`.
 
-### CocoaSeeds (for iOS 7)
+Carthage가 생성한 **PySwiftyRegex.framework**를 Xcode 프로젝트의 'General' 설정 아래의 'Embedded Binaries'에 추가합니다.
 
-[CocoaSeeds](https://github.com/devxoul/CocoaSeeds) allows you to use Swift libraries in iOS 7 projects.
+### CocoaSeeds (iOS 7+)
 
-Create **Seedfile**:
+[CocoaSeeds](https://github.com/devxoul/CocoaSeeds)를 사용하면 Swift로 작성된 라이브러리를 iOS 7 프로젝트에서 사용할 수 있습니다.
+
+먼저, **Seedfile**을 생성합니다.
 
 ```ruby
 target :MyApp do
@@ -77,16 +81,18 @@ target :MyApp do
 end
 ```
 
-Then run the following command:
+그리고 다음과 같은 쉘 명령어를 실행합니다.
 
 ```console
 $ seed install
 ```
 
-Now you can see the PySwiftyRegex.swift file in your Xcode project. Build and enjoy!
+PySwiftyRegex.swift 파일이 Xcode 프로젝트에 자동으로 포함된 것을 볼 수 있습니다. 즐코딩!
 
-## Supported re methods
-If you are familiar with Python's [**re**](https://docs.python.org/2/library/re.html) module, you are ready to go. If not, you may like to check how Python's re is better than the cumbersome NSRegularExpression's APIs, by clicking at the items below.
+## 사용 가능한 re 모듈
+
+Python의 [**re**](https://docs.python.org/2/library/re.html) 모듈에 익숙하다면 사용하는데 어려움이 없을 것입니다. 처음이거나 익숙하지 않은 경우, 아래 항목들을 보고 Python에서 정규표현식을 다루는 방식이 `NSRegularExpression`보다 어떻게 더 좋은지 확인해보세요.
+
 ### [re](https://docs.python.org/2/library/re.html#module-contents)
 * [re.compile](https://docs.python.org/2/library/re.html#re.compile)
 * [re.search](https://docs.python.org/2/library/re.html#re.search)
@@ -112,37 +118,37 @@ If you are familiar with Python's [**re**](https://docs.python.org/2/library/re.
 * [groups](https://docs.python.org/2/library/re.html#re.MatchObject.groups)
 * [span](https://docs.python.org/2/library/re.html#re.MatchObject.span)
 
-## <a name="more_usage"></a>More Usage Examples
-### Compile a RegexObject for future reuse
+## <a name="more_usage"></a>더 많은 예제
+### 재사용을 위해 RegexObject 객체 컴파일하기
 ```swift
 let regex = re.compile("this(.+)that")
 ```
-### Matching a pattern from beginning
+### 문자열 첫 부분부터 패턴 매칭하기 
 ```swift
 if let m = regex.match("this one is different from that") {
 	m.group()  //"this one is different from that"
 	m.group(1) //" one is different from "
 }
 ```
-### Searching a pattern (first match)
+### 패턴 검색하기 (가장 먼저 매칭되는 패턴)
 ```swift
 if let m = regex.search("I want this one, not that one") {
 	m.group()  //"this one, not that one"
 	m.group(1) //" one, not "
 }
 ```
-### Find all occurrences of a pattern
+### 매칭되는 모든 패턴 검색하기
 ```swift
 regex.findall("this or that, this and that") // ["this or that", "this and that"]
 ```
-### Get match results for all occurrences of a pattern
+### 모든 매칭 결과 가져오기
 ```swift
 for m in regex.finditer("this or that, this and that") {
 	m.group()  // 1st time: "this or that", 2nd time: "this and that"
 	m.group(1) // 1st time: " or ", 2nd time: " and "
 }
 ```
-### Splitting a string with pattern
+### 정규식으로 문자열 자르기
 ```swift
 let regex = re.compile("[\\+\\-\\*/]")
 
@@ -152,7 +158,7 @@ regex.split("1+2-3*4/5")    // ["1", "2", "3", "4", "5"]
 // Setting a maxsplit = 2
 regex.split("1+2-3*4/5", 2) // ["1", "2", "3*4/5"]
 ```
-### Replacing a pattern
+### 패턴 치환하기
 ```swift
 let regex = re.compile("[Yy]ou")
 
@@ -165,6 +171,6 @@ regex.sub("u", "You guys go grap your food", 1)  // "u guys go grap your food"
 regex.subn("u", "You guys go grap your food", 1) // ("u guys go grap your food", 1)
 ```
 
-## License
+## 라이센스
 
-`PySwiftyRegex` is released under the MIT license. See [LICENSE](https://github.com/cezheng/PySwiftyRegex/blob/master/LICENSE) for details.
+`PySwiftyRegex`는 MIT 라이센스 하에 배포됩니다. 자세한 내용은 [LICENSE](LICENSE) 파일을 참고하세요.
