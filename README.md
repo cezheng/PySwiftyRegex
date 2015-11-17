@@ -30,7 +30,7 @@ See [More examples](#more_usage).
 ## Installation
 > **Embedded frameworks require a minimum deployment target of iOS 8 or OS X Mavericks.**
 >
-> To use `PySwiftyRegex` with a project targeting iOS 7, copy the [PySwiftyRegex.swift](https://github.com/cezheng/PySwiftyRegex/blob/master/PySwiftyRegex/PySwiftyRegex.swift) file into your project.
+> To use `PySwiftyRegex` with a project targeting iOS 7, consider using [CocoaSeeds](#cocoaseeds-for-ios7) or copy the [PySwiftyRegex.swift](https://github.com/cezheng/PySwiftyRegex/blob/master/PySwiftyRegex/PySwiftyRegex.swift) file into your project.
 
 ### CocoaPods(iOS 8+, OS X 10.9+)
 You can use [Cocoapods](http://cocoapods.org/) to install `PySwiftyRegex` by adding it to your to your `Podfile`:
@@ -62,6 +62,26 @@ Run the following command:
 $ carthage update
 ```
 Then drag the `PySwiftyRegex.framework` built by Carthage into your target's `General` -> `Embedded Binaries`.
+
+### CocoaSeeds (for iOS 7)
+
+[CocoaSeeds](https://github.com/devxoul/CocoaSeeds) allows you to use Swift libraries in iOS 7 projects.
+
+Create **Seedfile**:
+
+```ruby
+target :MyApp do
+  github 'cezheng/PySwiftyRegex', '0.2.0', :files => 'PySwiftyRegex/PySwiftyRegex.swift'
+end
+```
+
+Then run the following command:
+
+```console
+$ seed install
+```
+
+Now you can see the PySwiftyRegex.swift file in your Xcode project. Build and enjoy!
 
 ## Supported re methods
 If you are familiar with Python's [**re**](https://docs.python.org/2/library/re.html) module, you are ready to go. If not, you may like to check how Python's re is better than the cumbersome NSRegularExpression's APIs, by clicking at the items below.
