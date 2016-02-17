@@ -276,7 +276,7 @@ public class re {
         if regex.numberOfCaptureGroups > 0 {
           results += MatchObject(string: string, match: result).groups()
         }
-        splitsLeft--
+        splitsLeft -= 1
         start = end.advancedBy(result.range.length)
       }
       if start <= string.endIndex {
@@ -363,7 +363,7 @@ public class re {
           return
         }
         if let result = result {
-          n++
+          n += 1
           let resultRange = NSRange(location: result.range.location + offset, length: result.range.length)
           let lengthBeforeReplace = mutable.length
           regex.replaceMatchesInString(mutable, options: [], range: resultRange, withTemplate: repl)
