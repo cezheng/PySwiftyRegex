@@ -24,6 +24,10 @@
 		793050D71BD8AD0A0040127B /* ReTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C383C3A1B50CFF5008837A8 /* ReTests.swift */; };
 		793050D81BD8AD0A0040127B /* ReRegexObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEBDCED1B39B2FC003A40BB /* ReRegexObjectTests.swift */; };
 		793050D91BD8AD0A0040127B /* ReMatchObjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEBDCFA1B39B48C003A40BB /* ReMatchObjectTests.swift */; };
+		795691DB1C74A9B9002B1CA4 /* ReTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C383C3A1B50CFF5008837A8 /* ReTests.swift */; };
+		795691DD1C74AACB002B1CA4 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795691DC1C74AACB002B1CA4 /* TestHelpers.swift */; };
+		795691DE1C74AACB002B1CA4 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795691DC1C74AACB002B1CA4 /* TestHelpers.swift */; };
+		795691DF1C74AACB002B1CA4 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795691DC1C74AACB002B1CA4 /* TestHelpers.swift */; };
 		795AFFA81BB5571B0055D858 /* PySwiftyRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEBDCF81B39B312003A40BB /* PySwiftyRegex.swift */; };
 		795AFFA91BB557320055D858 /* PySwiftyRegex.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CEBDCE11B39B2FB003A40BB /* PySwiftyRegex.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -66,6 +70,7 @@
 		0CEBDD2D1B39B8C4003A40BB /* PySwiftyRegex-OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PySwiftyRegex-OSXTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		793050BE1BD8AC610040127B /* PySwiftyRegex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PySwiftyRegex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		793050C71BD8AC610040127B /* PySwiftyRegex-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PySwiftyRegex-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		795691DC1C74AACB002B1CA4 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		795AFFA01BB556F30055D858 /* PySwiftyRegex.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PySwiftyRegex.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -165,6 +170,7 @@
 				0CEBDCED1B39B2FC003A40BB /* ReRegexObjectTests.swift */,
 				0CEBDCFA1B39B48C003A40BB /* ReMatchObjectTests.swift */,
 				0CEBDCEF1B39B2FC003A40BB /* Info.plist */,
+				795691DC1C74AACB002B1CA4 /* TestHelpers.swift */,
 			);
 			path = PySwiftyRegexTests;
 			sourceTree = "<group>";
@@ -457,6 +463,7 @@
 				0CEBDCFB1B39B48C003A40BB /* ReMatchObjectTests.swift in Sources */,
 				0CEBDCEE1B39B2FC003A40BB /* ReRegexObjectTests.swift in Sources */,
 				0C383C3B1B50CFF5008837A8 /* ReTests.swift in Sources */,
+				795691DD1C74AACB002B1CA4 /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,8 +479,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				795691DB1C74A9B9002B1CA4 /* ReTests.swift in Sources */,
 				0CEBDD3C1B39C54B003A40BB /* ReRegexObjectTests.swift in Sources */,
 				0CEBDD3D1B39C54B003A40BB /* ReMatchObjectTests.swift in Sources */,
+				795691DE1C74AACB002B1CA4 /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -492,6 +501,7 @@
 				793050D91BD8AD0A0040127B /* ReMatchObjectTests.swift in Sources */,
 				793050D71BD8AD0A0040127B /* ReTests.swift in Sources */,
 				793050D81BD8AD0A0040127B /* ReRegexObjectTests.swift in Sources */,
+				795691DF1C74AACB002B1CA4 /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -883,6 +893,7 @@
 				793050D01BD8AC610040127B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		793050D41BD8AC610040127B /* Build configuration list for PBXNativeTarget "PySwiftyRegex-tvOSTests" */ = {
 			isa = XCConfigurationList;
@@ -891,6 +902,7 @@
 				793050D21BD8AC610040127B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		795AFFA71BB556F30055D858 /* Build configuration list for PBXNativeTarget "PySwiftyRegex-WatchOS" */ = {
 			isa = XCConfigurationList;

@@ -22,20 +22,6 @@
 import XCTest
 import PySwiftyRegex
 
-infix operator == {}
-
-func == (left: [String?], right: [String?]) -> Bool {
-  guard left.count == right.count else {
-    return false
-  }
-  for (index, item) in left.enumerate() {
-    if item != right[index] {
-      return false
-    }
-  }
-  return true
-}
-
 class ReRegexObjectTests: XCTestCase {
   func testMatchSuccess() {
     let regex = re.compile("(this).+(that)")
@@ -170,7 +156,7 @@ class ReRegexObjectTests: XCTestCase {
     let string = "saldkfjalskfd,sdfjlskdfjl.//.sldkfjlskdfj,.sdjflksd."
     let substrings = regex.split(string)
     XCTAssertEqual(substrings.count, 7)
-    XCTAssertTrue(substrings == ["saldkfjalskfd", "sdfjlskdfjl", "//", "sldkfjlskdfj", "", "sdjflksd", ""] as [String?])
+    AssertEqual(substrings, ["saldkfjalskfd", "sdfjlskdfjl", "//", "sldkfjlskdfj", "", "sdjflksd", ""] as [String?])
   }
   
   func testSplitWithMaxSplitSuccess() {
@@ -178,7 +164,7 @@ class ReRegexObjectTests: XCTestCase {
     let string = "saldkfjalskfd,sdfjlskdfjl.//.sldkfjlskdfj,.sdjflksd."
     let substrings = regex.split(string, 5)
     XCTAssertEqual(substrings.count, 6)
-    XCTAssertTrue(substrings == ["saldkfjalskfd", "sdfjlskdfjl", "//", "sldkfjlskdfj", "", "sdjflksd."] as [String?])
+    AssertEqual(substrings, ["saldkfjalskfd", "sdfjlskdfjl", "//", "sldkfjlskdfj", "", "sdjflksd."] as [String?])
   }
   
   func testSplitWithGroups() {
@@ -186,7 +172,7 @@ class ReRegexObjectTests: XCTestCase {
     let string = "saldkfjalskfd,sdfjlskdfjl.//.sldkfjlskdfj,.sdjflksd."
     let substrings = regex.split(string)
     XCTAssertEqual(substrings.count, 13)
-    XCTAssertTrue(substrings == ["saldkfjalskfd", ",", "sdfjlskdfjl", ".", "//", ".", "sldkfjlskdfj", ",", "", ".", "sdjflksd", ".", ""] as [String?])
+    AssertEqual(substrings, ["saldkfjalskfd", ",", "sdfjlskdfjl", ".", "//", ".", "sldkfjlskdfj", ",", "", ".", "sdjflksd", ".", ""] as [String?])
   }
   
   func testSubSuccess() {
@@ -223,7 +209,7 @@ class ReRegexObjectTests: XCTestCase {
     XCTAssertNil(regex.search("test") as? AnyObject)
     XCTAssertNil(regex.match("test") as? AnyObject)
     XCTAssertNil(regex.nsRegex)
-    XCTAssertTrue(regex.split("sdf(sdf") == [])
+    AssertEqual(regex.split("sdf(sdf"), [])
     XCTAssertEqual(regex.sub("o", "hahaha("), "hahaha(")
     XCTAssertEqual(regex.subn("o", "hahaha(").1, 0)
   }

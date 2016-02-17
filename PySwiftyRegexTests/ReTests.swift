@@ -22,26 +22,6 @@
 import XCTest
 import PySwiftyRegex
 
-
-infix operator == {}
-
-func ==<T1: Equatable,T2: Equatable> (left:(T1, T2), right:(T1, T2)) -> Bool {
-  return (left.0 == right.0) && (left.1 == right.1)
-}
-
-func ==<T: Equatable>(left:[T?], right:[T?]) -> Bool {
-  guard left.count == right.count else {
-    return false
-  }
-  for (index, item) in left.enumerate() {
-    if item != right[index] {
-      return false
-    }
-  }
-  return true
-}
-
-
 class ReTests: XCTestCase {
   func testCompileValidRegex() {
     let regex = re.compile("(\\W+)", flags: [.AllowCommentsAndWhitespace, .AnchorsMatchLines])
@@ -63,30 +43,30 @@ class ReTests: XCTestCase {
   }
   
   func testSearch() {
-    XCTAssertTrue(re.search("a", "ssa")!.groups() == [])
-    XCTAssertTrue(re.search("(a)", "ssa")!.groups() == ["a"])
-    XCTAssertTrue(re.search("(a)", "ssa")!.group(0) == "a")
-    XCTAssertTrue(re.search("(a)", "ssa")!.group(1) == "a")
-    XCTAssertTrue(re.search("(a)", "ssa")!.group([1, 1]) == ["a", "a"])
+    AssertEqual(re.search("a", "ssa")!.groups(),[])
+    AssertEqual(re.search("(a)", "ssa")!.groups(), ["a"])
+    XCTAssertEqual(re.search("(a)", "ssa")!.group(0), "a")
+    XCTAssertEqual(re.search("(a)", "ssa")!.group(1), "a")
+    AssertEqual(re.search("(a)", "ssa")!.group([1, 1]), ["a", "a"])
   }
   
   func testMatch() {
-    XCTAssertTrue(re.match("a", "a")!.groups() == [])
-    XCTAssertTrue(re.match("(a)", "a")!.groups() == ["a"])
-    XCTAssertTrue(re.match("(a)", "a")!.group(0) == "a")
-    XCTAssertTrue(re.match("(a)", "a")!.group(1) == "a")
-    XCTAssertTrue(re.match("(a)", "a")!.group([1, 1]) == ["a", "a"])
+    AssertEqual(re.match("a", "a")!.groups(), [])
+    AssertEqual(re.match("(a)", "a")!.groups(), ["a"])
+    XCTAssertEqual(re.match("(a)", "a")!.group(0), "a")
+    XCTAssertEqual(re.match("(a)", "a")!.group(1), "a")
+    AssertEqual(re.match("(a)", "a")!.group([1, 1]), ["a", "a"])
   }
   
   func testSplit() {
-    XCTAssertTrue(re.split(":", ":a:b::c") == ["", "a", "b", "", "c"])
-    XCTAssertEqual(re.split(":*", ":a:b::c").map{$0!}, ["", "a", "b", "c"])
-    XCTAssertTrue(re.split("(:*)", ":a:b::c") == ["", ":", "a", ":", "b", "::", "c"])
-    XCTAssertTrue(re.split("(?::*)", ":a:b::c") == ["", "a", "b", "c"])
-    XCTAssertTrue(re.split("(:)*", ":a:b::c") == ["", ":", "a", ":", "b", ":", "c"])
-    XCTAssertTrue(re.split("([b:]+)", ":a:b::c") == ["", ":", "a", ":b::", "c"])
-    XCTAssertTrue(re.split("(b)|(:+)", ":a:b::c") == ["", nil, ":", "a", nil, ":", "", "b", nil, "", nil, "::", "c"])
-    XCTAssertTrue(re.split("(?:b)|(?::+)", ":a:b::c") == ["", "a", "", "", "c"])
+    AssertEqual(re.split(":", ":a:b::c"), ["", "a", "b", "", "c"])
+    AssertEqual(re.split(":*", ":a:b::c").map{$0!}, ["", "a", "b", "c"])
+    AssertEqual(re.split("(:*)", ":a:b::c"), ["", ":", "a", ":", "b", "::", "c"])
+    AssertEqual(re.split("(?::*)", ":a:b::c"), ["", "a", "b", "c"])
+    AssertEqual(re.split("(:)*", ":a:b::c"), ["", ":", "a", ":", "b", ":", "c"])
+    AssertEqual(re.split("([b:]+)", ":a:b::c"), ["", ":", "a", ":b::", "c"])
+    AssertEqual(re.split("(b)|(:+)", ":a:b::c"), ["", nil, ":", "a", nil, ":", "", "b", nil, "", nil, "::", "c"])
+    AssertEqual(re.split("(?:b)|(?::+)", ":a:b::c"), ["", "a", "", "", "c"])
   }
   
   func testFindAll() {
@@ -109,11 +89,11 @@ class ReTests: XCTestCase {
   }
   
   func testSubN() {
-    XCTAssertTrue(re.subn("(?i)b+", "x", "bbbb BBBB") == ("x x", 2))
-    XCTAssertTrue(re.subn("b+", "x", "bbbb BBBB") == ("x BBBB", 1))
-    XCTAssertTrue(re.subn("b+", "x", "xyz") == ("xyz", 0))
-    XCTAssertTrue(re.subn("b*", "x", "xyz") == ("xxxyxzx", 4))
-    XCTAssertTrue(re.subn("b*", "x", "xyz", 2) == ("xxxyz", 2))
+    AssertEqual(re.subn("(?i)b+", "x", "bbbb BBBB"), ("x x", 2))
+    AssertEqual(re.subn("b+", "x", "bbbb BBBB"), ("x BBBB", 1))
+    AssertEqual(re.subn("b+", "x", "xyz"), ("xyz", 0))
+    AssertEqual(re.subn("b*", "x", "xyz"), ("xxxyxzx", 4))
+    AssertEqual(re.subn("b*", "x", "xyz", 2), ("xxxyz", 2))
   }
   
 }
