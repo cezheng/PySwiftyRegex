@@ -485,9 +485,9 @@ public class re {
       if nsrange.location == NSNotFound {
         return string.endIndex..<string.endIndex
       }
-      let startIndex = string.startIndex.advancedBy(nsrange.location)
-      let endIndex = startIndex.advancedBy(nsrange.length)
-      return startIndex..<endIndex
+      let startIndex16 = string.utf16.startIndex.advancedBy(nsrange.location)
+      let endIndex16 = startIndex16.advancedBy(nsrange.length)
+      return (String.Index(startIndex16, within: string) ?? string.endIndex)..<(String.Index(endIndex16, within: string) ?? string.endIndex)
     }
   }
 }
