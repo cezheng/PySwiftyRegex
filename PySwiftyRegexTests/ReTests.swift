@@ -24,19 +24,19 @@ import PySwiftyRegex
 
 class ReTests: XCTestCase {
   func testCompileValidRegex() {
-    let regex = re.compile("(\\W+)", flags: [.AllowCommentsAndWhitespace, .AnchorsMatchLines])
+    let regex = re.compile("(\\W+)", flags: [.allowCommentsAndWhitespace, .anchorsMatchLines])
     XCTAssertTrue(regex.isValid)
-    XCTAssertEqual(regex.flags, NSRegularExpressionOptions.AllowCommentsAndWhitespace.union(.AnchorsMatchLines))
+    XCTAssertEqual(regex.flags, RegularExpression.Options.allowCommentsAndWhitespace.union(.anchorsMatchLines))
     XCTAssertEqual(regex.pattern, "(\\W+)")
-    XCTAssertEqual(regex.nsRegex!, try! NSRegularExpression(pattern: "(\\W+)", options: NSRegularExpressionOptions.AllowCommentsAndWhitespace.union(.AnchorsMatchLines)))
+    XCTAssertEqual(regex.nsRegex!, try! RegularExpression(pattern: "(\\W+)", options: RegularExpression.Options.allowCommentsAndWhitespace.union(.anchorsMatchLines)))
     XCTAssertEqual(regex.groups, 1)
     
   }
   
   func testCompileInvalidRegex() {
-    let regex = re.compile("(\\W+", flags: [.AllowCommentsAndWhitespace, .AnchorsMatchLines])
+    let regex = re.compile("(\\W+", flags: [.allowCommentsAndWhitespace, .anchorsMatchLines])
     XCTAssertFalse(regex.isValid)
-    XCTAssertEqual(regex.flags, NSRegularExpressionOptions(rawValue: 0))
+    XCTAssertEqual(regex.flags, RegularExpression.Options(rawValue: 0))
     XCTAssertEqual(regex.pattern, "(\\W+")
     XCTAssertNil(regex.nsRegex)
     XCTAssertEqual(regex.groups, 0)

@@ -21,13 +21,13 @@
 
 import XCTest
 
-func AssertEqual<T1: Equatable,T2: Equatable> (left:(T1, T2), _ right:(T1, T2)) {
+func AssertEqual<T1: Equatable,T2: Equatable> (_ left:(T1, T2), _ right:(T1, T2)) {
   XCTAssertTrue((left.0 == right.0) && (left.1 == right.1))
 }
 
-func AssertEqual<T: Equatable>(left:[T?], _ right:[T?]) {
+func AssertEqual<T: Equatable>(_ left:[T?], _ right:[T?]) {
   XCTAssertEqual(left.count, right.count)
-  for (index, item) in left.enumerate() {
+  for (index, item) in left.enumerated() {
     XCTAssertEqual(item, right[index])
   }
 }
