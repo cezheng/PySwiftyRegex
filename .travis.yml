@@ -11,11 +11,10 @@ env:
     - TVOS_SCHEME="PySwiftyRegex-tvOS"
     - WATCHOS_SCHEME="PySwiftyRegex-WatchOS"
   matrix:
-    - DESTINATION="platform=OS X,arch=x86_64" SCHEME="$OSX_SCHEME" ACTION="test"
+    - DESTINATION="platform=macOS,arch=x86_64" SCHEME="$OSX_SCHEME" ACTION="test"
     - DESTINATION="platform=iOS Simulator,name=iPhone 6s" SCHEME="$IOS_SCHEME" EXTRA="-sdk iphonesimulator" ACTION="test"
     - DESTINATION="platform=tvOS Simulator,name=Apple TV 1080p" SCHEME="$TVOS_SCHEME" ACTION="test"
     - DESTINATION="name=Apple Watch - 38mm" SCHEME="$WATCHOS_SCHEME" ACTION="build"
 
 script: 
-  - xcode-select -p
-  - xctool -project "$XCODEPROJ" -scheme "$SCHEME" -destination "$DESTINATION" $EXTRA $ACTION
+  - xcodebuild -project "$XCODEPROJ" -scheme "$SCHEME" -destination "$DESTINATION" $EXTRA $ACTION
