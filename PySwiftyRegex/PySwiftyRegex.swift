@@ -218,7 +218,7 @@ public class re {
         return nil
       }
       let start = pos > 0 ?pos :0
-      let end = endpos ?? string.characters.count
+      let end = endpos ?? string.utf16.count
       let length = max(0, end - start)
       let range = NSRange(location: start, length: length)
       if let match = regex.firstMatchInString(string, options: options, range: range) {
@@ -257,7 +257,7 @@ public class re {
         return []
       }
       var splitsLeft = maxsplit == 0 ? Int.max : (maxsplit < 0 ? 0 : maxsplit)
-      let range = NSRange(location: 0, length: string.characters.count)
+      let range = NSRange(location: 0, length: string.utf16.count)
       var results = [String?]()
       var start = string.startIndex
       var end = string.startIndex
@@ -316,7 +316,7 @@ public class re {
         return []
       }
       let start = pos > 0 ?pos :0
-      let end = endpos ?? string.characters.count
+      let end = endpos ?? string.utf16.count
       let length = max(0, end - start)
       let range = NSRange(location: start, length: length)
       return regex.matchesInString(string, options: [], range: range).map { MatchObject(string: string, match: $0) }
@@ -352,7 +352,7 @@ public class re {
       guard let regex = regex else {
         return (string, 0)
       }
-      let range = NSRange(location: 0, length: string.characters.count)
+      let range = NSRange(location: 0, length: string.utf16.count)
       let mutable = NSMutableString(string: string)
       let maxCount = count == 0 ? Int.max : (count > 0 ? count : 0)
       var n = 0
