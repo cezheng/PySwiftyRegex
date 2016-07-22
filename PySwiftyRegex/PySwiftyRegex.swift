@@ -267,7 +267,7 @@ public class re {
           return
         }
 
-        guard let result = result where result.range.length > 0 else {
+        guard let result = result, result.range.length > 0 else {
           return
         }
         
@@ -420,7 +420,7 @@ public class re {
     - returns: string of the matching group
     */
     public func group(_ index: Int = 0) -> String? {
-      guard let range = span(index) where range.lowerBound < string.endIndex else {
+      guard let range = span(index), range.lowerBound < string.endIndex else {
         return nil
       }
       return string[range]
