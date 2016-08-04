@@ -156,7 +156,7 @@ public class re {
   */
   public class RegexObject {
     /// Typealias for NSRegularExpressionOptions
-    public typealias Flag = RegularExpression.Options
+    public typealias Flag = NSRegularExpression.Options
     
     /// Whether this object is valid or not
     public var isValid: Bool {
@@ -166,10 +166,10 @@ public class re {
     /// Pattern used to construct this RegexObject
     public let pattern: String
     
-    private let regex: RegularExpression?
+    private let regex: NSRegularExpression?
     
     /// Underlying NSRegularExpression Object
-    public var nsRegex: RegularExpression? {
+    public var nsRegex: NSRegularExpression? {
       return regex
     }
     
@@ -194,7 +194,7 @@ public class re {
     public required init(pattern: String, flags: Flag = [])  {
       self.pattern = pattern
       do {
-        self.regex = try RegularExpression(pattern: pattern, options: flags)
+        self.regex = try NSRegularExpression(pattern: pattern, options: flags)
       } catch let error as NSError {
         self.regex = nil
         debugPrint(error)
@@ -213,7 +213,7 @@ public class re {
     
     - returns: search result as MatchObject instance if a match is found, otherwise return nil
     */
-    public func search(_ string: String, _ pos: Int = 0, _ endpos: Int? = nil, options: RegularExpression.MatchingOptions = []) -> MatchObject? {
+    public func search(_ string: String, _ pos: Int = 0, _ endpos: Int? = nil, options: NSRegularExpression.MatchingOptions = []) -> MatchObject? {
       guard let regex = regex else {
         return nil
       }
@@ -383,9 +383,9 @@ public class re {
     public let string: String
     
     /// Underlying NSTextCheckingResult
-    public let match: TextCheckingResult
+    public let match: NSTextCheckingResult
     
-    init(string: String, match: TextCheckingResult) {
+    init(string: String, match: NSTextCheckingResult) {
       self.string = string
       self.match = match
     }
@@ -480,7 +480,7 @@ public class re {
       if index >= match.numberOfRanges {
         return nil
       }
-      let nsrange = match.range(at: index)
+      let nsrange = match.rangeAt(index)
       
       if nsrange.location == NSNotFound {
         return string.endIndex..<string.endIndex
