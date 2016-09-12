@@ -1,5 +1,5 @@
 // ReRegexObjectTests.swift
-// Copyright (c) 2015 Ce Zheng
+// Copyright (c) 2015ー2016 Ce Zheng
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -206,8 +206,8 @@ class ReRegexObjectTests: XCTestCase {
   func testCompileInvalidPattern() {
     let regex = re.compile("(")
     XCTAssertFalse(regex.isValid)
-    XCTAssertNil(regex.search("test") as? AnyObject)
-    XCTAssertNil(regex.match("test") as? AnyObject)
+    XCTAssertNil(regex.search("test"))
+    XCTAssertNil(regex.match("test"))
     XCTAssertNil(regex.nsRegex)
     AssertEqual(regex.split("sdf(sdf"), [])
     XCTAssertEqual(regex.sub("o", "hahaha("), "hahaha(")
