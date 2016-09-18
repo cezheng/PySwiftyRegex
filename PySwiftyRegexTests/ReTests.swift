@@ -1,5 +1,5 @@
 // ReTests.swift
-// Copyright (c) 2015 Ce Zheng
+// Copyright (c) 2015ー2016 Ce Zheng
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,19 +24,19 @@ import PySwiftyRegex
 
 class ReTests: XCTestCase {
   func testCompileValidRegex() {
-    let regex = re.compile("(\\W+)", flags: [.AllowCommentsAndWhitespace, .AnchorsMatchLines])
+    let regex = re.compile("(\\W+)", flags: [.allowCommentsAndWhitespace, .anchorsMatchLines])
     XCTAssertTrue(regex.isValid)
-    XCTAssertEqual(regex.flags, NSRegularExpressionOptions.AllowCommentsAndWhitespace.union(.AnchorsMatchLines))
+    XCTAssertEqual(regex.flags, NSRegularExpression.Options.allowCommentsAndWhitespace.union(.anchorsMatchLines))
     XCTAssertEqual(regex.pattern, "(\\W+)")
-    XCTAssertEqual(regex.nsRegex!, try! NSRegularExpression(pattern: "(\\W+)", options: NSRegularExpressionOptions.AllowCommentsAndWhitespace.union(.AnchorsMatchLines)))
+    XCTAssertEqual(regex.nsRegex!, try! NSRegularExpression(pattern: "(\\W+)", options: NSRegularExpression.Options.allowCommentsAndWhitespace.union(.anchorsMatchLines)))
     XCTAssertEqual(regex.groups, 1)
     
   }
   
   func testCompileInvalidRegex() {
-    let regex = re.compile("(\\W+", flags: [.AllowCommentsAndWhitespace, .AnchorsMatchLines])
+    let regex = re.compile("(\\W+", flags: [.allowCommentsAndWhitespace, .anchorsMatchLines])
     XCTAssertFalse(regex.isValid)
-    XCTAssertEqual(regex.flags, NSRegularExpressionOptions(rawValue: 0))
+    XCTAssertEqual(regex.flags, NSRegularExpression.Options(rawValue: 0))
     XCTAssertEqual(regex.pattern, "(\\W+")
     XCTAssertNil(regex.nsRegex)
     XCTAssertEqual(regex.groups, 0)
