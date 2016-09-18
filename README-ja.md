@@ -7,8 +7,9 @@
 
 Pythonのようなスッキリした正規表現ライブラリー。
 
-[English](https://github.com/cezheng/PySwiftyRegex/blob/master/README.md)
-[简体中文](https://github.com/cezheng/PySwiftyRegex/blob/master/README-zh.md)
+[English](README.md)
+[简体中文](README-zh.md)
+[한국어](README-ko.md)
 
 ## コードをみましょう
 
@@ -25,12 +26,14 @@ if let m = re.search("[Tt]his is (.*?)easy", "I think this is really easy!!!") {
 ## 環境
 
 - iOS 7.0+ / Mac OS X 10.9+
-- Xcode 7.0+
+- Xcode 8.0+
+
+> Swift 2.3はバージョン[0.3.0](../../releases/tag/0.3.0)をご利用ください。
 
 ## インストール
 > **Embedded frameworks を使うには iOS 8 または OS X Mavericks 以上は必要です**
 >
-> Deployment Target は iOS 7 のプロジェクトで `PySwiftyRegex` を使うには, [PySwiftyRegex.swift](https://github.com/cezheng/PySwiftyRegex/blob/master/PySwiftyRegex/PySwiftyRegex.swift) のソースファイルをダウンロードして、Xcodeプロジェクトに追加するのは必要となります。
+> Deployment Target は iOS 7 のプロジェクトで `PySwiftyRegex` を使うには, [PySwiftyRegex.swift](PySwiftyRegex/PySwiftyRegex.swift) のソースファイルをダウンロードして、Xcodeプロジェクトに追加するのは必要となります。
 
 ### CocoaPods(iOS 8+, OS X 10.9+)
 [Cocoapods](http://cocoapods.org/) で簡単に `PySwiftyRegex` をインストールできます。 下記のように`Podfile`を編集してください:
@@ -40,7 +43,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MyApp' do
-	pod 'PySwiftyRegex', '~> 0.2.0'
+	pod 'PySwiftyRegex', '~> 1.0.0'
 end
 ```
 
@@ -54,7 +57,7 @@ $ pod install
 下記の行を `Cartfile` か `Cartfile.private` かに追加してください:
 
 ```
-github "cezheng/PySwiftyRegex" ~> 0.2.0
+github "cezheng/PySwiftyRegex" ~> 1.0.0
 ```
 そして、下記のコマンドを実行してください:
 
@@ -145,4 +148,4 @@ regex.subn("u", "You guys go grap your food", 1) // ("u guys go grap your food",
 
 ## ライセンス
 
-`PySwiftyRegex` のオープンソースライセンスは MIT です。 詳しくはこちら [LICENSE](https://github.com/cezheng/PySwiftyRegex/blob/master/LICENSE) 。
+`PySwiftyRegex` のオープンソースライセンスは MIT です。 詳しくはこちら [LICENSE](LICENSE) 。

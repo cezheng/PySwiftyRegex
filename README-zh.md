@@ -7,8 +7,9 @@
 
 像Python一样简洁高效地作正则处理。
 
-[English](https://github.com/cezheng/PySwiftyRegex/blob/master/README.md)
-[日本語](https://github.com/cezheng/PySwiftyRegex/blob/master/README-ja.md)
+[English](README.md)
+[日本語](README-ja.md)
+[한국어](README-ko.md)
 
 ## 先上代码
 
@@ -25,7 +26,9 @@ if let m = re.search("[Tt]his is (.*?)easy", "I think this is really easy!!!") {
 ## 环境
 
 - iOS 7.0+ / Mac OS X 10.9+
-- Xcode 7.0+
+- Xcode 8.0+
+
+> Swift 2.3请使用[0.3.0](../../releases/tag/0.3.0)版。
 
 ## 导入
 > **使用 Embedded frameworks 至少需要 iOS 8 或 OS X Mavericks.**

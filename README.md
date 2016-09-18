@@ -7,8 +7,8 @@
 
 Easily deal with Regex in Swift in a Pythonic way.
 
-[简体中文](https://github.com/cezheng/PySwiftyRegex/blob/master/README-zh.md)
-[日本語](https://github.com/cezheng/PySwiftyRegex/blob/master/README-ja.md)
+[简体中文](README-zh.md)
+[日本語](README-ja.md)
 [한국어](README-ko.md)
 
 ## This is Easy
@@ -26,13 +26,15 @@ See [More examples](#more_usage).
 ## Requirements
 
 - iOS 7.0+ / Mac OS X 10.9+
-- Xcode 7.0+
+- Xcode 8.0+
+
+< For Swift 2.3 please use version [0.3.0](../../releases/tag/0.3.0).
 
 
 ## Installation
 > **Embedded frameworks require a minimum deployment target of iOS 8 or OS X Mavericks.**
 >
-> To use `PySwiftyRegex` with a project targeting iOS 7, consider using [CocoaSeeds](#cocoaseeds-for-ios7) or copy the [PySwiftyRegex.swift](https://github.com/cezheng/PySwiftyRegex/blob/master/PySwiftyRegex/PySwiftyRegex.swift) file into your project.
+> To use `PySwiftyRegex` with a project targeting iOS 7, consider using [CocoaSeeds](#cocoaseeds-for-ios7) or copy the [PySwiftyRegex.swift](PySwiftyRegex/PySwiftyRegex.swift) file into your project.
 
 ### CocoaPods(iOS 8+, OS X 10.9+)
 You can use [Cocoapods](http://cocoapods.org/) to install `PySwiftyRegex` by adding it to your to your `Podfile`:
@@ -42,7 +44,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MyApp' do
-	pod 'PySwiftyRegex', '~> 0.2.0'
+	pod 'PySwiftyRegex', '~> 1.0.0'
 end
 ```
 
@@ -56,7 +58,7 @@ $ pod install
 Adding the following line to your `Cartfile` or `Cartfile.private`:
 
 ```
-github "cezheng/PySwiftyRegex" ~> 0.2.0
+github "cezheng/PySwiftyRegex" ~> 1.0.0
 ```
 Run the following command:
 
@@ -73,7 +75,7 @@ Create **Seedfile**:
 
 ```ruby
 target :MyApp do
-  github 'cezheng/PySwiftyRegex', '0.2.0', :files => 'PySwiftyRegex/PySwiftyRegex.swift'
+  github 'cezheng/PySwiftyRegex', '1.0.0', :files => 'PySwiftyRegex/PySwiftyRegex.swift'
 end
 ```
 
@@ -167,4 +169,4 @@ regex.subn("u", "You guys go grap your food", 1) // ("u guys go grap your food",
 
 ## License
 
-`PySwiftyRegex` is released under the MIT license. See [LICENSE](https://github.com/cezheng/PySwiftyRegex/blob/master/LICENSE) for details.
+`PySwiftyRegex` is released under the MIT license. See [LICENSE](LICENSE) for details.

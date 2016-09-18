@@ -8,8 +8,8 @@
 Swift에서 정규표현식을 Python처럼 쉽게 다뤄보세요.
 
 [English](README.md)
-[简体中文](https://github.com/cezheng/PySwiftyRegex/blob/master/README-zh.md)
-[日本語](https://github.com/cezheng/PySwiftyRegex/blob/master/README-ja.md)
+[简体中文](README-zh.md)
+[日本語](README-ja.md)
 
 ## 굉장히 쉽습니다
 
@@ -27,12 +27,14 @@ if let m = re.search("[Tt]his is (.*?)easy", "I think this is really easy!!!") {
 ## 요구사항
 
 - iOS 7.0+ / Mac OS X 10.9+
-- Xcode 7.0+
+- Xcode 8.0+
+
+> Swift 2.3의 경우 버전 [0.3.0](../../releases/tag/0.3.0)를 이용해주십시오.
 
 ## 설치하기
 > **임베드된 프레임워크를 사용하려면 iOS 8 또는 OS X Mavericks 이상을 지원해야 합니다.**
 >
-> `PySwiftyRegex`을 iOS 7 타겟 프로젝트에서 사용하려면 [CocoaSeeds](#cocoaseeds-for-ios7)를 사용하거나 혹은 [PySwiftyRegex.swift](https://github.com/cezheng/PySwiftyRegex/blob/master/PySwiftyRegex/PySwiftyRegex.swift) 파일을 다운받아 프로젝트에 직접 포함시켜야 합니다.
+> `PySwiftyRegex`을 iOS 7 타겟 프로젝트에서 사용하려면 [CocoaSeeds](#cocoaseeds-for-ios7)를 사용하거나 혹은 [PySwiftyRegex.swift](PySwiftyRegex/PySwiftyRegex.swift) 파일을 다운받아 프로젝트에 직접 포함시켜야 합니다.
 
 ### CocoaPods (iOS 8+, OS X 10.9+)
 
@@ -43,7 +45,7 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'MyApp' do
-	pod 'PySwiftyRegex', '~> 0.2.0'
+	pod 'PySwiftyRegex', '~> 1.0.0'
 end
 ```
 
@@ -58,7 +60,7 @@ $ pod install
 **Cartfile** 또는 **Cartfile.private**에 아래 라인을 추가합니다.
 
 ```
-github "cezheng/PySwiftyRegex" ~> 0.2.0
+github "cezheng/PySwiftyRegex" ~> 1.0.0
 ```
 
 그리고 쉘에서 다음 명령어를 실행합니다.
@@ -77,7 +79,7 @@ Carthage가 생성한 **PySwiftyRegex.framework**를 Xcode 프로젝트의 'Gene
 
 ```ruby
 target :MyApp do
-  github 'cezheng/PySwiftyRegex', '0.2.0', :files => 'PySwiftyRegex/PySwiftyRegex.swift'
+  github 'cezheng/PySwiftyRegex', '1.0.0', :files => 'PySwiftyRegex/PySwiftyRegex.swift'
 end
 ```
 
