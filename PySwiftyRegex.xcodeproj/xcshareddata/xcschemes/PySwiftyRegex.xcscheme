@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0CEBDCDD1B39B2FB003A40BB"
+               BlueprintIdentifier = "0CEBDD231B39B8C3003A40BB"
                BuildableName = "PySwiftyRegex.framework"
-               BlueprintName = "PySwiftyRegex-iOS"
+               BlueprintName = "PySwiftyRegex"
                ReferencedContainer = "container:PySwiftyRegex.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -28,9 +28,9 @@
             buildForAnalyzing = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0CEBDCE71B39B2FC003A40BB"
-               BuildableName = "PySwiftyRegex-iOSTests.xctest"
-               BlueprintName = "PySwiftyRegex-iOSTests"
+               BlueprintIdentifier = "0CEBDD2C1B39B8C4003A40BB"
+               BuildableName = "PySwiftyRegexTests.xctest"
+               BlueprintName = "PySwiftyRegexTests"
                ReferencedContainer = "container:PySwiftyRegex.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0CEBDCE71B39B2FC003A40BB"
-               BuildableName = "PySwiftyRegex-iOSTests.xctest"
-               BlueprintName = "PySwiftyRegex-iOSTests"
+               BlueprintIdentifier = "0CEBDD2C1B39B8C4003A40BB"
+               BuildableName = "PySwiftyRegexTests.xctest"
+               BlueprintName = "PySwiftyRegexTests"
                ReferencedContainer = "container:PySwiftyRegex.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -56,9 +56,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0CEBDCDD1B39B2FB003A40BB"
+            BlueprintIdentifier = "0CEBDD231B39B8C3003A40BB"
             BuildableName = "PySwiftyRegex.framework"
-            BlueprintName = "PySwiftyRegex-iOS"
+            BlueprintName = "PySwiftyRegex"
             ReferencedContainer = "container:PySwiftyRegex.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -78,9 +78,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0CEBDCDD1B39B2FB003A40BB"
+            BlueprintIdentifier = "0CEBDD231B39B8C3003A40BB"
             BuildableName = "PySwiftyRegex.framework"
-            BlueprintName = "PySwiftyRegex-iOS"
+            BlueprintName = "PySwiftyRegex"
             ReferencedContainer = "container:PySwiftyRegex.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -96,9 +96,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0CEBDCDD1B39B2FB003A40BB"
+            BlueprintIdentifier = "0CEBDD231B39B8C3003A40BB"
             BuildableName = "PySwiftyRegex.framework"
-            BlueprintName = "PySwiftyRegex-iOS"
+            BlueprintName = "PySwiftyRegex"
             ReferencedContainer = "container:PySwiftyRegex.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

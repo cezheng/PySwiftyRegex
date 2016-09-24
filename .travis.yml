@@ -6,15 +6,12 @@ osx_image: xcode8
 env:
   global:
     - XCODEPROJ="PySwiftyRegex.xcodeproj"
-    - IOS_SCHEME="PySwiftyRegex-iOS"
-    - OSX_SCHEME="PySwiftyRegex-OSX"
-    - TVOS_SCHEME="PySwiftyRegex-tvOS"
-    - WATCHOS_SCHEME="PySwiftyRegex-WatchOS"
+    - SCHEME="PySwiftyRegex"
   matrix:
-    - DESTINATION="platform=OS X,arch=x86_64" SCHEME="$OSX_SCHEME" SDK="macosx" ACTION="test"
-    - DESTINATION="platform=iOS Simulator,name=iPhone 6s" SCHEME="$IOS_SCHEME" SDK="iphonesimulator" ACTION="test"
-    - DESTINATION="platform=tvOS Simulator,name=Apple TV 1080p" SCHEME="$TVOS_SCHEME" SDK="appletvsimulator" ACTION="test"
-    - DESTINATION="name=Apple Watch - 38mm" SCHEME="$WATCHOS_SCHEME" SDK="watchsimulator" ACTION="build"
+    - DESTINATION="platform=OS X,arch=x86_64" SDK="macosx" ACTION="test"
+    - DESTINATION="platform=iOS Simulator,name=iPhone 6s" SDK="iphonesimulator" ACTION="test"
+    - DESTINATION="platform=tvOS Simulator,name=Apple TV 1080p" SDK="appletvsimulator" ACTION="test"
+    - DESTINATION="name=Apple Watch - 38mm" SDK="watchsimulator" ACTION="build"
 
 script: 
   - xcode-select -p
