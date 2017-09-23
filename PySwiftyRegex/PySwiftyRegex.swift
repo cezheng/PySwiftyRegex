@@ -272,7 +272,7 @@ public class re {
         }
         
         end = string.characters.index(string.startIndex, offsetBy: result.range.location)
-        results.append(string[start..<end])
+        results.append(String(string[start..<end]))
         if regex.numberOfCaptureGroups > 0 {
           results += MatchObject(string: string, match: result).groups()
         }
@@ -280,7 +280,7 @@ public class re {
         start = string.index(end, offsetBy: result.range.length)
       }
       if start <= string.endIndex {
-        results.append(string[start..<string.endIndex])
+        results.append(String(string[start..<string.endIndex]))
       }
       return results
     }
@@ -423,7 +423,7 @@ public class re {
       guard let range = span(index), range.lowerBound < string.endIndex else {
         return nil
       }
-      return string[range]
+      return String(string[range])
     }
     
     /**
@@ -480,13 +480,13 @@ public class re {
       if index >= match.numberOfRanges {
         return nil
       }
-      let nsrange = match.rangeAt(index)
+      let nsrange = match.range(at: index)
       
       if nsrange.location == NSNotFound {
         return string.endIndex..<string.endIndex
       }
-      let startIndex16 = string.utf16.startIndex.advanced(by: nsrange.location)
-      let endIndex16 = startIndex16.advanced(by: nsrange.length)
+      let startIndex16 = string.index(string.startIndex, offsetBy: nsrange.location)
+      let endIndex16 = string.index(startIndex16, offsetBy: nsrange.length)
       return (String.Index(startIndex16, within: string) ?? string.endIndex)..<(String.Index(endIndex16, within: string) ?? string.endIndex)
     }
   }
