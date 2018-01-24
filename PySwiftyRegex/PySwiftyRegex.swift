@@ -485,8 +485,8 @@ public class re {
       if nsrange.location == NSNotFound {
         return string.endIndex..<string.endIndex
       }
-      let startIndex16 = string.index(string.startIndex, offsetBy: nsrange.location)
-      let endIndex16 = string.index(startIndex16, offsetBy: nsrange.length)
+      let startIndex16 = string.utf16.index(string.startIndex, offsetBy: nsrange.location)
+      let endIndex16 = string.utf16.index(startIndex16, offsetBy: nsrange.length)
       return (String.Index(startIndex16, within: string) ?? string.endIndex)..<(String.Index(endIndex16, within: string) ?? string.endIndex)
     }
   }
