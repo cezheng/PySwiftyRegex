@@ -271,7 +271,7 @@ public class re {
           return
         }
         
-        end = string.characters.index(string.startIndex, offsetBy: result.range.location)
+        end = string.index(string.startIndex, offsetBy: result.range.location)
         results.append(String(string[start..<end]))
         if regex.numberOfCaptureGroups > 0 {
           results += MatchObject(string: string, match: result).groups()
