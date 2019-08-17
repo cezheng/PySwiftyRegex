@@ -36,10 +36,10 @@ public class re {
   
   - returns: The created RegexObject object. If the pattern is invalid, RegexObject.isValid is false, and all methods have a default return value.
   */
-  public static func compile(_ pattern: String, flags: RegexObject.Flag = []) -> RegexObject  {
+  public static func compile(_ pattern: String, flags: RegexObject.Flag = []) -> RegexObject {
     return RegexObject(pattern: pattern, flags: flags)
   }
-  
+
   /**
   Scan through string looking for the first location where the regular expression pattern produces a match, and return a corresponding MatchObject instance.
   
@@ -54,7 +54,7 @@ public class re {
   public static func search(_ pattern: String, _ string: String, flags: RegexObject.Flag = []) -> MatchObject? {
     return re.compile(pattern, flags: flags).search(string)
   }
-  
+
   /**
   If zero or more characters at the beginning of string match the regular expression pattern, return a corresponding MatchObject instance.
   
@@ -69,7 +69,7 @@ public class re {
   public static func match(_ pattern: String, _ string: String, flags: RegexObject.Flag = []) -> MatchObject? {
     return re.compile(pattern, flags: flags).match(string)
   }
-  
+
   /**
   Split string by the occurrences of pattern. If capturing parentheses are used in pattern, then the text of all groups in the pattern are also returned as part of the resulting list. If maxsplit is nonzero, at most maxsplit splits occur, and the remainder of the string is returned as the final element of the list.
   
@@ -100,7 +100,7 @@ public class re {
   public static func findall(_ pattern: String, _ string: String, flags: RegexObject.Flag = []) -> [String] {
     return re.compile(pattern, flags: flags).findall(string)
   }
-  
+
   /**
   Return an array of MatchObject instances over all non-overlapping matches for the RE pattern in string. The string is scanned left-to-right, and matches are returned in the order found. Empty matches are included in the result unless they touch the beginning of another match.
   
@@ -115,7 +115,7 @@ public class re {
   public static func finditer(_ pattern: String, _ string: String, flags: RegexObject.Flag = []) -> [MatchObject] {
     return re.compile(pattern, flags: flags).finditer(string)
   }
-  
+
   /**
   Return the string obtained by replacing the leftmost non-overlapping occurrences of pattern in string by the replacement repl. If the pattern isn’t found, string is returned unchanged. Different from python, passing a repl as a closure is not supported.
   
@@ -132,7 +132,7 @@ public class re {
   public static func sub(_ pattern: String, _ repl: String, _ string: String, _ count: Int = 0, flags: RegexObject.Flag = []) -> String {
     return re.compile(pattern, flags: flags).sub(repl, string, count)
   }
-  
+
   /**
   Perform the same operation as sub(), but return a tuple (new_string, number_of_subs_made) as (String, Int)
   
@@ -149,7 +149,7 @@ public class re {
   public static func subn(_ pattern: String, _ repl: String, _ string: String, _ count: Int = 0, flags: RegexObject.Flag = []) -> (String, Int) {
     return re.compile(pattern, flags: flags).subn(repl, string, count)
   }
-  
+
   // MARK: - RegexObject
   /**
   *  Counterpart of Python's re.RegexObject
@@ -157,32 +157,32 @@ public class re {
   public class RegexObject {
     /// Typealias for NSRegularExpressionOptions
     public typealias Flag = NSRegularExpression.Options
-    
+
     /// Whether this object is valid or not
     public var isValid: Bool {
       return regex != nil
     }
-    
+
     /// Pattern used to construct this RegexObject
     public let pattern: String
-    
+
     private let regex: NSRegularExpression?
-    
+
     /// Underlying NSRegularExpression Object
     public var nsRegex: NSRegularExpression? {
       return regex
     }
-    
+
     /// NSRegularExpressionOptions used to contructor this RegexObject
     public var flags: Flag {
       return regex?.options ?? []
     }
-    
+
     /// Number of capturing groups
     public var groups: Int {
       return regex?.numberOfCaptureGroups ?? 0
     }
-    
+
     /**
     Create A re.RegexObject Instance
     
@@ -191,7 +191,7 @@ public class re {
     
     - returns: The created RegexObject object. If the pattern is invalid, RegexObject.isValid is false, and all methods have a default return value.
     */
-    public required init(pattern: String, flags: Flag = [])  {
+    public required init(pattern: String, flags: Flag = []) {
       self.pattern = pattern
       do {
         self.regex = try NSRegularExpression(pattern: pattern, options: flags)
@@ -200,7 +200,7 @@ public class re {
         debugPrint(error)
       }
     }
-    
+
     /**
     Scan through string looking for a location where this regular expression produces a match, and return a corresponding MatchObject instance. Return nil if no position in the string matches the pattern; note that this is different from finding a zero-length match at some point in the string.
     
@@ -226,7 +226,7 @@ public class re {
       }
       return nil
     }
-    
+
     /**
     If zero or more characters at the beginning of string match this regular expression, return a corresponding MatchObject instance. Return nil if the string does not match the pattern; note that this is different from a zero-length match.
     
@@ -241,7 +241,7 @@ public class re {
     public func match(_ string: String, _ pos: Int = 0, _ endpos: Int? = nil) -> MatchObject? {
       return search(string, pos, endpos, options: [.anchored])
     }
-    
+
     /**
     Identical to the re.split() function, using the compiled pattern.
     
@@ -284,7 +284,7 @@ public class re {
       }
       return results
     }
-    
+
     /**
     Similar to the re.findall() function, using the compiled pattern, but also accepts optional pos and endpos parameters that limit the search region like for match().
     
@@ -299,7 +299,7 @@ public class re {
     public func findall(_ string: String, _ pos: Int = 0, _ endpos: Int? = nil) -> [String] {
       return finditer(string, pos, endpos).map { $0.group()! }
     }
-    
+
     /**
     Similar to the re.finditer() function, using the compiled pattern, but also accepts optional pos and endpos parameters that limit the search region like for match().
     
@@ -321,7 +321,7 @@ public class re {
       let range = NSRange(location: start, length: length)
       return regex.matches(in: string, options: [], range: range).map { MatchObject(string: string, match: $0) }
     }
-    
+
     /**
     Identical to the re.sub() function, using the compiled pattern.
     
@@ -336,7 +336,7 @@ public class re {
     public func sub(_ repl: String, _ string: String, _ count: Int = 0) -> String {
       return subn(repl, string, count).0
     }
-    
+
     /**
     Identical to the re.subn() function, using the compiled pattern.
     
@@ -373,7 +373,7 @@ public class re {
       return (mutable as String, n)
     }
   }
-  
+
   // MARK: - MatchObject
   /**
   *  Counterpart of Python's re.MatchObject
@@ -381,15 +381,15 @@ public class re {
   public final class MatchObject {
     /// String matched
     public let string: String
-    
+
     /// Underlying NSTextCheckingResult
     public let match: NSTextCheckingResult
-    
+
     init(string: String, match: NSTextCheckingResult) {
       self.string = string
       self.match = match
     }
-    
+
     /**
     Return the string obtained by doing backslash substitution on the template string template, as done by the sub() method.
     
@@ -407,7 +407,7 @@ public class re {
       }
       return regex.replacementString(for: match, in: string, offset: 0, template: template)
     }
-    
+
     /**
     Returns one subgroup of the match. If the group number is negative or larger than the number of groups defined in the pattern, nil returned. If a group is contained in a part of the pattern that did not match, the corresponding result is nil. If a group is contained in a part of the pattern that matched multiple times, the last match is returned.
     
@@ -425,7 +425,7 @@ public class re {
       }
       return String(string[range])
     }
-    
+
     /**
     Returns one or more subgroups of the match. If a group number is negative or larger than the number of groups defined in the pattern, nil is inserted at the relevant index of the returned array. If a group is contained in a part of the pattern that did not match, the corresponding result is None. If a group is contained in a part of the pattern that matched multiple times, the last match is returned.
     
@@ -438,7 +438,7 @@ public class re {
     public func group(_ indexes: [Int]) -> [String?] {
       return indexes.map { group($0) }
     }
-    
+
     /**
     Return an array containing all the subgroups of the match, from 1 up to however many groups are in the pattern. The default argument is used for groups that did not participate in the match.
     
@@ -453,7 +453,7 @@ public class re {
     public func groups(_ defaultValue: String) -> [String] {
       return (1..<match.numberOfRanges).map { group($0) ?? defaultValue }
     }
-    
+
     /**
     Return an array containing all the subgroups of the match, from 1 up to however many groups are in the pattern. For groups that did not participate in the match, nil is inserted at the relevant index of the return array.
     
@@ -466,7 +466,7 @@ public class re {
     public func groups() -> [String?] {
       return (1..<match.numberOfRanges).map { group($0) }
     }
-    
+
     /**
     Return the range of substring matched by group; group defaults to zero (meaning the whole matched substring). Return nil if paremeter is invalid or group exists but did not contribute to the match.
     
@@ -481,7 +481,7 @@ public class re {
         return nil
       }
       let nsrange = match.range(at: index)
-      
+
       if nsrange.location == NSNotFound {
         return string.endIndex..<string.endIndex
       }
