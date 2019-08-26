@@ -22,7 +22,7 @@
 import XCTest
 import PySwiftyRegex
 
-class ReMatchObjectTests: XCTestCase {  
+class ReMatchObjectTests: XCTestCase {
   func testExpand() {
     let regex = re.compile("(this).+(that)")
     let string = "this one is different from that one."
@@ -32,7 +32,7 @@ class ReMatchObjectTests: XCTestCase {
     XCTAssertEqual(match.string, string)
     XCTAssertEqual(match.expand("$2 ~ $1"), "that ~ this")
   }
-  
+
   func testGroups() {
     let m = re.match("(\\d+)\\.(\\d+)", "24.1632")
     XCTAssertNotNil(m)
@@ -43,7 +43,7 @@ class ReMatchObjectTests: XCTestCase {
     XCTAssertEqual(groups[0]!, "24")
     XCTAssertEqual(groups[1]!, "1632")
   }
-  
+
   func testGroupsWithNoGroup() {
     let m = re.match("\\d+\\.\\d+", "24.1632")
     XCTAssertNotNil(m)
@@ -52,7 +52,7 @@ class ReMatchObjectTests: XCTestCase {
     let groups = match.groups()
     XCTAssertTrue(groups.isEmpty)
   }
-  
+
   func testGroupsWithDefault() {
     let m = re.match("(\\d+)\\.?(\\d+)?", "24")
     XCTAssertNotNil(m)
